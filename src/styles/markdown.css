@@ -1,0 +1,26 @@
+@import "./markdown-editor.css";
+@import "./markdown-preview.css";
+
+.md-preview table {
+  width: 100%;
+  overflow-y: scroll;
+}
+.md-preview {
+  font-size: 16px;
+}
+.md-preview table > thead > tr > th {
+  font-size: 16px;
+}
+
+.md-preview table > tbody > tr > td {
+  font-size: 16px;
+}
+
+.md-preview p {
+  white-space: pre-line;
+  letter-spacing: 0.4px;
+}
+
+.code-highlight{
+  display: none !important;
+}

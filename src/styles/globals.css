@@ -1,0 +1,63 @@
+/* @tailwind base; */
+@tailwind components;
+@tailwind utilities;
+
+p {
+  margin: 0;
+}
+
+input::-webkit-input-placeholder {
+  color: "#9199a6";
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+.no-scrollbar::-webkit-scrollbar-track {
+  width: 0;
+  display: none;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  width: 0;
+  display: none;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb:hover {
+  width: 0;
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+
+#chakra-toast-manager-top-right {
+  margin-top: 80px;
+}
+
+.chakra-container {
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.monaco-editor .iPadShowKeyboard {
+  display: none;
+}
+
+.css-hhland {
+  white-space: noWrap;
+}
+
+html,body{
+  width: 100vw;
+  height: 100vh;
+}
+
+#__next{
+  width: 100vw;
+  height: 100vh;
+}
