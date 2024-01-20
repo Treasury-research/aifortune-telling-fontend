@@ -98,7 +98,7 @@ export default function UserForm(props: any) {
                         placeholder='请输入时间'
                         showTime
                         disabled={item.isSubmit}
-                        value={item.birthDay ? dayjs(item.birthDay, dateFormat) : ''}
+                        value={item.birthDay ? dayjs(item.birthDay, dateFormat) : null}
                         format={dateFormat}
                         onChange={(date: any, dateString: any) => {
                             console.log(dateString)
