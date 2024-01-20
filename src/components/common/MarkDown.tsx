@@ -26,9 +26,7 @@ export const Markdown = ({ value }: any) => {
         source={(value && value.trim()) || ""}
         className="md-preview"
         linkTarget="_blank"
-        previewOptions={{
-          breaks: true,
-        }}
+        
       />
       {/* <div dangerouslySetInnerHTML={{ __html: value }}></div> */}
     </div>
