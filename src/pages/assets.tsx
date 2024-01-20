@@ -23,7 +23,7 @@ import { IoMdAdd } from "react-icons/io";
 import moment from "moment";
 import { getTimeRange } from "lib/common";
 
-export default function assets() {
+export default function Assets() {
   const {
     setActiveChatId,
     activeChatId,
@@ -185,7 +185,7 @@ export default function assets() {
                       <div className="overflow-hidden w-full">
                         {
                           assets.map((t: any, i: number) => (
-                            <div className="truncate w-[120px] flex items-center justify-center 
+                            <div key={i} className="truncate w-[120px] flex items-center justify-center 
                             mb-3 float-left mr-3 mx-4 h-10 border-[1px] 
                             border-[#D8D8D8] bg-[#fff] hover:opacity-70 
                             rounded-[2px] cursor-pointer text-center"
