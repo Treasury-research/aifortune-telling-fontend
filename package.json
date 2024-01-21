@@ -6,7 +6,7 @@
     "dev": "cross-env NODE_ENV=development next dev",
     "build": "next build",
     "build:test": "cross-env NODE_ENV=test next build",
-    "start": "next start -p 3003",
+    "start": "next start -p 3005",
     "lint": "next lint",
     "test": "jest",
     "test:watch": "jest --watch"
