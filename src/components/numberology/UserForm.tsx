@@ -59,13 +59,14 @@ export default function UserForm(props: any) {
             setBirthDay(item.birthDay)
             setUserConverId(activeChatId)
         }
+        updateChat(activeChatId, { name: item.name })
         updateMessage(activeChatId, item.id, { isSubmit: true })
         submitQuestion('form', {
             year: item.birthDay.split('/')[0],
             month: item.birthDay.split('/')[1],
             day: item.birthDay.split('/')[2].split(' ')[0],
             time: getTimeRange(item.birthDay.split('/')[2].split(' ')[1]),
-            n: item.isSubmit == '1' ? false : true,
+            n: item.sex == '1' ? false : true,
         })
     }
     return (

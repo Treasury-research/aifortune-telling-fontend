@@ -57,6 +57,7 @@ export default function AssetForm(props: any) {
             is_public: item == '1' ? false : true,
             n: true,
         });
+        updateChat(activeChatId, { name: item.name })
         if (res && res.length > 0 && res[0]['status'] == "success") {
             getAssets()
             updateMessage(activeChatId, item.id, { isSubmit: true })
