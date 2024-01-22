@@ -130,7 +130,7 @@ export default function Numerology() {
         <div className='w-[calc(100%-280px)] h-full pr-5'>
           <div className='h-20 flex items-center text-[18px] font-bold'>{activeChat ? activeChat.name : ''}</div>
           <div className='w-full h-[calc(100%-80px)] bg-[#F3F4F6] rounded-[10px] pt-10 px-10'>
-            <div className='h-[calc(100%-100px)] overflow-auto no-scrollbar' id="chat-content">
+            <div className='h-[calc(100%-100px)] overflow-auto' id="chat-content">
               {
                 activeChat && activeChat.messages && (
                   <>
