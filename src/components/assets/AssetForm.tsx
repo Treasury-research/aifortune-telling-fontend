@@ -92,7 +92,7 @@ export default function AssetForm(props: any) {
                         showTime 
                         placeholder='请输入时间'
                         disabled={item.isSubmit}
-                        value={item.birthDay ? dayjs(item.birthDay, dateFormat) : ''}
+                        value={item.birthDay ? dayjs(item.birthDay, dateFormat) : null}
                         format={dateFormat}
                         onChange={(date: any, dateString: any) => {
                             console.log(dateString)
