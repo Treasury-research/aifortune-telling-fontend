@@ -46,7 +46,8 @@ export default function ChatLeft(props: any) {
                             />
                         </>
                     ) : (
-                        <Markdown value={item.content} />
+                        // <Markdown value={item.content} />
+                        <p>{item.content}</p>
                     )
                 }
 

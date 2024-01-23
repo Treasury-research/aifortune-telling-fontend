@@ -29,8 +29,9 @@ import { MdDeleteOutline } from "react-icons/md";
 import useChatContext from "hooks/useChatContext";
 import { v4 as uuidv4 } from "uuid";
 import api, { baseURL } from "api";
+import { userInfoStore } from "store/userInfoStore";
 
-export default function Channel(props:any) {
+export default function Channel(props: any) {
     const router = useRouter();
     const myInput = useRef<any>(null);
     const [editIndex, setEditIndex] = useState<any>(null)
@@ -46,6 +47,16 @@ export default function Channel(props:any) {
         isGenerate,
         addChat,
     } = useChatContext();
+
+    const {
+        name,
+        birthDay,
+        setName,
+        setBirthDay,
+        userConverId,
+        setUserConverId,
+        user_id
+    } = userInfoStore();
 
     return (
         <div className='w-full'>
@@ -83,86 +94,87 @@ export default function Channel(props:any) {
                                 <div className='truncate'>{t.name}</div>
                             )
                         }
-                        {
-                            allChatList.length > 1 &&
-                            (
-                                <div className={`invisible group-hover:visible`}>
-                                    <Popover placement="top">
-                                        <PopoverTrigger>
-                                            <Flex w="20px" pl={2} justify="center">
-                                                <Icon
-                                                    as={HiOutlineEllipsisVertical}
-                                                    className="text-[21px] cursor-pointer h-6"
-                                                    _hover={{ transform: "scale(1.1)" }}
-                                                />
-                                            </Flex>
-                                        </PopoverTrigger>
-                                        <PopoverContent w="140px" ml={2} overflow="hidden" border="none">
-                                            <PopoverArrow bg="bg.main" />
-                                            <PopoverBody bg="#F3F4F6" px={0} py={1} fontSize="13px">
-                                                <HStack
-                                                    w="full"
-                                                    _hover={{ bg: "gray.300" }}
-                                                    cursor="pointer"
-                                                    px={2}
-                                                    py={1}
-                                                    onClick={() => {
-                                                        setTimeout(() => {
-                                                            myInput.current.focus();
-                                                        }, 100);
-                                                        setEditIndex(i)
-                                                    }}
+                        <div className={`invisible group-hover:visible`}>
+                            <Popover placement="top">
+                                <PopoverTrigger>
+                                    <Flex w="20px" pl={2} justify="center">
+                                        <Icon
+                                            as={HiOutlineEllipsisVertical}
+                                            className="text-[21px] cursor-pointer h-6"
+                                            _hover={{ transform: "scale(1.1)" }}
+                                        />
+                                    </Flex>
+                                </PopoverTrigger>
+                                <PopoverContent w="140px" ml={2} overflow="hidden" border="none">
+                                    <PopoverArrow bg="bg.main" />
+                                    <PopoverBody bg="#F3F4F6" px={0} py={1} fontSize="13px">
+                                        <HStack
+                                            w="full"
+                                            _hover={{ bg: "gray.300" }}
+                                            cursor="pointer"
+                                            px={2}
+                                            py={1}
+                                            onClick={() => {
+                                                setTimeout(() => {
+                                                    myInput.current.focus();
+                                                }, 100);
+                                                setEditIndex(i)
+                                            }}
+                                        >
+                                            <Icon
+                                                as={FiEdit}
+                                                color="#7A61DE"
+                                                cursor="pointer"
+                                                w="20px"
+                                            />
+                                            <Text>编辑</Text>
+                                        </HStack>
+                                        {
+                                            t.id !== userConverId &&
+                                            <HStack
+                                                w="full"
+                                                _hover={{ bg: "gray.300" }}
+                                                cursor="pointer"
+                                                px={2}
+                                                py={1}
+                                                onClick={() => {
+                                                    props.resetConvertion()
+                                                }}
+                                            >
+                                                <Icon as={LuRefreshCcw} color="#7A61DE" w="20px" />
+                                                <Text
+                                                    whiteSpace="nowrap"
+                                                    overflow="hidden"
+                                                    textOverflow="ellipsis"
                                                 >
-                                                    <Icon
-                                                        as={FiEdit}
-                                                        color="#7A61DE"
-                                                        cursor="pointer"
-                                                        w="20px"
-                                                    />
-                                                    <Text>编辑</Text>
-                                                </HStack>
-                                                <HStack
-                                                    w="full"
-                                                    _hover={{ bg: "gray.300" }}
-                                                    cursor="pointer"
-                                                    px={2}
-                                                    py={1}
-                                                    onClick={() => {
-                                                        props.resetConvertion()
-                                                    }}
-                                                >
-                                                    <Icon as={LuRefreshCcw} color="#7A61DE" w="20px" />
-                                                    <Text
-                                                        whiteSpace="nowrap"
-                                                        overflow="hidden"
-                                                        textOverflow="ellipsis"
-                                                    >
-                                                        重置对话
-                                                    </Text>
-                                                </HStack>
-                                                <HStack
-                                                    w="full"
-                                                    _hover={{ bg: "gray.300" }}
-                                                    px={2}
-                                                    py={1}
-                                                    onClick={() => {
-                                                        removeChat(t.id)
-                                                        const filterChatList = allChatList.filter((item: any) => {
-                                                            return t.id !== item.id
-                                                        })
-                                                        console.log(filterChatList)
-                                                        router.push(`/${section}?id=${filterChatList[0]['id']}`)
-                                                    }}
-                                                >
-                                                    <Icon as={MdDeleteOutline} color="#7A61DE" w="20px" />
-                                                    <Text>删除对话</Text>
-                                                </HStack>
-                                            </PopoverBody>
-                                        </PopoverContent>
-                                    </Popover>
-                                </div>
-                            )
-                        }
+                                                    重置对话
+                                                </Text>
+                                            </HStack>
+                                        }
+                                        {
+                                            allChatList.length > 1 && t.id !== userConverId &&
+                                            <HStack
+                                                w="full"
+                                                _hover={{ bg: "gray.300" }}
+                                                px={2}
+                                                py={1}
+                                                onClick={() => {
+                                                    removeChat(t.id)
+                                                    const filterChatList = allChatList.filter((item: any) => {
+                                                        return t.id !== item.id
+                                                    })
+                                                    console.log(filterChatList)
+                                                    router.push(`/${section}?id=${filterChatList[0]['id']}`)
+                                                }}
+                                            >
+                                                <Icon as={MdDeleteOutline} color="#7A61DE" w="20px" />
+                                                <Text>删除对话</Text>
+                                            </HStack>
+                                        }
+                                    </PopoverBody>
+                                </PopoverContent>
+                            </Popover>
+                        </div>
                     </div>
                 ))
             }
