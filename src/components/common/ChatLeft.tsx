@@ -17,7 +17,7 @@ export default function ChatLeft(props: any) {
     return (
         <div className='flex gap-5 items-start mb-5'>
             <Image className='shrink-0' src={`/images/chat/left-chat.png`} alt="" />
-            <div className='max-w-[800px] p-5 bg-[#fff] rounded-[6px]'>
+            <div className='max-w-[800px] p-5 bg-[#fff] rounded-[6px] overflow-auto'>
                 {
                     item.loading ? (
                         <>
@@ -47,7 +47,7 @@ export default function ChatLeft(props: any) {
                         </>
                     ) : (
                         // <Markdown value={item.content} />
-                        <p>{item.content}</p>
+                        <pre>{item.content}</pre>
                     )
                 }
 
