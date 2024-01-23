@@ -96,9 +96,6 @@ export default function Numerology() {
 
   return (
     <>
-      <Head>
-        <title>AI</title>
-      </Head>
       <div className='w-full h-full flex'>
         <div className='w-[120px] h-full bg-[#E4DFF8]'>
           <div className='w-[50px] mx-auto mt-5 mb-10 h-[50px]'>

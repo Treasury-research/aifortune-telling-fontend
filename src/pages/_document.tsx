@@ -13,10 +13,10 @@ class MyDocument extends Document {
 	render() {
 		return (
 			<Html lang="en">
-				<title>AI算命</title>
-				<Head>
-					
-				</Head>
+				<title>AI 算命</title>
+        <Head>
+          <link rel="shortcut icon" href="/favicon.png" />
+        </Head>
 				<body>
 					<ColorModeScript
 						initialColorMode={customTheme.config?.initialColorMode}
