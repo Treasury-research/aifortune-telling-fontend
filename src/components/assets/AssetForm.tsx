@@ -67,6 +67,7 @@ export default function AssetForm(props: any) {
                 day: item.birthDay.split('/')[2].split(' ')[0],
                 time: getTimeRange(item.birthDay.split('/')[2].split(' ')[1]),
                 n: true,
+                name:item.name
             })
         }
     }

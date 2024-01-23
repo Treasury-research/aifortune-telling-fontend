@@ -104,6 +104,7 @@ export default function Assets() {
       month: parsedDate.split('/')[1],
       day: parsedDate.split('/')[2].split(' ')[0],
       time: getTimeRange(parsedDate.split('/')[2].split(' ')[1]),
+      name:t[0],
       n: true,
     })
   }
@@ -157,7 +158,7 @@ export default function Assets() {
         <div className='w-[calc(100%-280px)] h-full pr-5'>
           <div className='h-20 flex items-center text-[18px] font-bold'>{activeChat ? activeChat.name : ''}</div>
           <div className='w-full h-[calc(100%-80px)] bg-[#F3F4F6] rounded-[10px] pt-10 px-10'>
-            <div className='h-[calc(100%-100px)] overflow-auto' id="chat-content">
+            <div className={`${activeChat && activeChat.messages && activeChat.messages.length > 0 ? 'overflow-auto h-[calc(100%-100px)]' : 'h-full'}`} id="chat-content">
               {
                 activeChat && activeChat.messages && activeChat.messages.length > 0 ? (
                   <>
@@ -182,7 +183,7 @@ export default function Assets() {
                       <div className='mb-10 font-bold text-[16px] text-center'>
                         请选择下列币种，占卜您与该币种的关系
                       </div>
-                      <div className="overflow-hidden w-full">
+                      <div className="overflow-auto w-full max-h-[50vh]">
                         {
                           assets.map((t: any, i: number) => (
                             <div key={i} className="truncate w-[120px] flex items-center justify-center 
