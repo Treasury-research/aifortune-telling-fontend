@@ -221,15 +221,7 @@ export default function ChatProvider({ children }: any) {
 
   const handleNumer = async (type: 'chat' | 'form', paload: any) => {
     const id = uuidv4()
-    addMessage(activeChatId, [{
-      id,
-      content: '',
-      type: 'answer',
-      loading: true
-    }])
-
-    onScroll(400)
-
+  
     const onChunkedResponseError = (err: any) => {
       console.error(err);
     };
@@ -295,6 +287,7 @@ export default function ChatProvider({ children }: any) {
     // let body :any;
     let url: any
     let params: any
+    let source:any
     if (type == 'form') {
       // 已经填入个人信息，走八字匹配接口
       if (userConverId && user_id) {
@@ -324,6 +317,17 @@ export default function ChatProvider({ children }: any) {
         conversation_id: activeChat.id
       }
     }
+
+    addMessage(activeChatId, [{
+      id,
+      content: '',
+      type: 'answer',
+      loading: true,
+      source:type
+    }])
+
+    onScroll(400)
+
     // await api.post(`${baseURL}/api/assets_select`, {
     //   user_id:'',
     // });

@@ -17,7 +17,7 @@ export default function ChatLeft(props: any) {
     return (
         <div className='flex gap-5 items-start mb-5'>
             <Image className='shrink-0' src={`/images/chat/left-chat.png`} alt="" />
-            <div className='max-w-[calc(100vw-600px)] p-5 bg-[#fff] rounded-[6px] overflow-auto'>
+            <div className='p-5 bg-[#fff] rounded-[6px] overflow-auto'>
                 {
                     item.loading ? (
                         <>
@@ -46,8 +46,19 @@ export default function ChatLeft(props: any) {
                             />
                         </>
                     ) : (
-                        // <Markdown value={item.content} />
-                        <pre>{item.content}</pre>
+                        <>
+                            {
+                                item.source == 'form' || !item.source ? (
+                                    <div className='max-w-[calc(100vw-600px)]'>
+                                        <pre>{item.content}</pre>
+                                    </div>
+                                ) : (
+                                    <div className='max-w-[calc(100vw-820px)]'>
+                                        {item.content}
+                                    </div>
+                                )
+                            }
+                        </>
                     )
                 }
 
