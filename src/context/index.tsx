@@ -192,7 +192,9 @@ export default function ChatProvider({ children }: any) {
           ...paload,
           user_id,
           conversation_id:activeChat.id,
-          matcher_type:'2'
+          matcher_type:2,
+          day:paload.day ? Number(paload.day).toString() : '',
+          month:paload.month ? Number(paload.month).toString() : ''
         }
     } else {
       url = '/api/chat_bazi_match'
@@ -297,13 +299,17 @@ export default function ChatProvider({ children }: any) {
           ...paload,
           user_id,
           conversation_id:activeChat.id,
-          matcher_type:'1'
+          matcher_type:1,
+          day:paload.day ? Number(paload.day).toString() : '',
+          month:paload.month ? Number(paload.month).toString() : ''
         }
       } else {
         url = '/api/baziAnalysis'
         params = {
           ...paload,
-          conversation_id:activeChat.id
+          conversation_id:activeChat.id,
+          day:paload.day ? Number(paload.day).toString() : '',
+          month:paload.month ? Number(paload.month).toString() : ''
         }
       }
     } else {
