@@ -36,7 +36,7 @@ export const getCnDate = (typeUtc: string,date: string) => {
     const day = utcPlus8.getDate() < 10 ? `0${utcPlus8.getDate()}` : utcPlus8.getDate()
 
     let formattedDate = utcPlus8.getFullYear() + '/' + month + '/' + day;
-    console.log(formattedDate)
+
     return formattedDate
 };
 
