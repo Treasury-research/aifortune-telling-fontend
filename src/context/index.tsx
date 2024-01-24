@@ -200,7 +200,8 @@ export default function ChatProvider({ children }: any) {
       url = '/api/chat_bazi_match'
       params = {
         ...paload,
-        conversation_id: activeChat.id
+        conversation_id: activeChat.id,
+        matcher_type:2,
       }
     }
 
@@ -322,7 +323,8 @@ export default function ChatProvider({ children }: any) {
       }
       params = {
         ...paload,
-        conversation_id: activeChat.id
+        conversation_id: activeChat.id,
+        matcher_type:1,
       }
     }
 
