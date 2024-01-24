@@ -91,7 +91,9 @@ export default function Assets() {
           category: 'form',
           name: '',
           birthDay: '',
-          is_public: '1'
+          is_public: '1',
+          time:'1-3',
+          utc:'UTC+08:00'
         }
       ],
     })

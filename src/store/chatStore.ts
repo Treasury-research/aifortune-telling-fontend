@@ -153,6 +153,7 @@ export const useChatStore: any = create<any>()(
       },
       clearChatInfo: () => {
         set({
+          // state
           activeChatId: null,
           chatById: {},
         });

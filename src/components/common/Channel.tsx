@@ -46,6 +46,8 @@ export default function Channel(props: any) {
         section,
         isGenerate,
         addChat,
+        submitQuestion,
+        addMessage
     } = useChatContext();
 
     const {
@@ -129,8 +131,6 @@ export default function Channel(props: any) {
                                             />
                                             <Text>编辑</Text>
                                         </HStack>
-                                        {
-                                            t.id !== userConverId &&
                                             <HStack
                                                 w="full"
                                                 _hover={{ bg: "gray.300" }}
@@ -150,7 +150,6 @@ export default function Channel(props: any) {
                                                     重置对话
                                                 </Text>
                                             </HStack>
-                                        }
                                         {
                                             allChatList.length > 1 && t.id !== userConverId &&
                                             <HStack
@@ -171,6 +170,30 @@ export default function Channel(props: any) {
                                                 <Text>删除对话</Text>
                                             </HStack>
                                         }
+                                        {
+                                            userConverId &&
+                                            <HStack
+                                                w="full"
+                                                _hover={{ bg: "gray.300" }}
+                                                px={2}
+                                                py={1}
+                                                onClick={() => {
+                                                    addMessage(activeChatId, [{
+                                                        id: uuidv4(),
+                                                        type: 'question',
+                                                        category: 'chat',
+                                                        content: '精确匹配'
+                                                    }])
+                                                    submitQuestion('jqpp', {
+                                                        message: '精确匹配'
+                                                    })
+                                                }}
+                                            >
+                                                <Icon as={MdDeleteOutline} color="#7A61DE" w="20px" />
+                                                <Text>精确匹配</Text>
+                                            </HStack>
+                                        }
+
                                     </PopoverBody>
                                 </PopoverContent>
                             </Popover>

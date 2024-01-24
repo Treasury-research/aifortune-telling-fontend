@@ -41,12 +41,15 @@ export const userInfoStore: any = create<any>()(
           birthDay,
         });
       },
-      clearChatInfo: () => {
+      clearUserInfo: () => {
         set({
+          // state
           name: '',
-          sex: '1', //1 男 2女
+          sex: false, //false 男 true女
           birthDay: '',
-          assets:[]
+          user_id:'',
+          userConverId:'',
+          assets:[],
         });
       },
     }),

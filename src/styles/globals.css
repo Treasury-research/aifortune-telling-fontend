@@ -61,3 +61,8 @@ html,body{
   width: 100vw;
   height: 100vh;
 }
+
+.pre-item{
+  white-space: pre-wrap!important;
+  word-wrap: break-word!important;
+}

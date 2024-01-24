@@ -68,7 +68,7 @@ export default function ChatProvider({ children }: any) {
   const [allChatList, setAllChatList] = useState(chatList);
 
   useEffect(() => {
-    console.log('router',router)
+    console.log('router', router)
     if (router.query.id) {
       if (getChat(router.query.id)) {
         setActiveChatId(router.query.id);
@@ -98,10 +98,10 @@ export default function ChatProvider({ children }: any) {
   }, [section, chatById, activeChatId]);
 
   const getAssets = async () => {
-    const res:any = await api.post(`${baseURL}/api/assets_select`, {
+    const res: any = await api.post(`${baseURL}/api/assets_select`, {
       user_id,
     });
-    if(res && res.length > 0 && res[0].data && res[0].data.length > 0){
+    if (res && res.length > 0 && res[0].data && res[0].data.length > 0) {
       setAssets(res[0].data)
     }
   }
@@ -118,12 +118,12 @@ export default function ChatProvider({ children }: any) {
       JSON.parse(str);
       return true;
     } catch (error) {
-      console.log('error',error)
+      console.log('error', error)
       return false;
     }
   };
 
-  const submitQuestion = async (type: 'chat' | 'form', paload: any) => {
+  const submitQuestion = async (type: 'chat' | 'form' | 'jqpp', paload: any) => {
     if (section == 'numerology') {
       handleNumer(type, paload)
     } else {
@@ -131,13 +131,14 @@ export default function ChatProvider({ children }: any) {
     }
   }
 
-  const handleAsset = async (type: 'chat' | 'form', paload: any) => {
+  const handleAsset = async (type: 'chat' | 'form' | 'jqpp', paload: any) => {
     const id = uuidv4()
     addMessage(activeChatId, [{
       id,
       content: '',
       type: 'answer',
-      loading: true
+      loading: true,
+      source: type
     }])
 
     onScroll(400)
@@ -188,20 +189,25 @@ export default function ChatProvider({ children }: any) {
 
     if (type == 'form') {
       url = '/api/baziMatch'
-        params = {
-          ...paload,
-          user_id,
-          conversation_id:activeChat.id,
-          matcher_type:2,
-          day:paload.day ? Number(paload.day).toString() : '',
-          month:paload.month ? Number(paload.month).toString() : ''
-        }
-    } else {
+      params = {
+        ...paload,
+        user_id,
+        conversation_id: activeChat.id,
+        matcher_type: 2,
+        day: paload.day ? Number(paload.day).toString() : '',
+        month: paload.month ? Number(paload.month).toString() : ''
+      }
+    } else if (type == 'chat') {
       url = '/api/chat_bazi_match'
       params = {
         ...paload,
         conversation_id: activeChat.id,
-        matcher_type:2,
+        matcher_type: 2,
+      }
+    } else {
+      url = '/api/get_bazi_info'
+      params = {
+        conversation_id: activeChat.id
       }
     }
 
@@ -223,9 +229,9 @@ export default function ChatProvider({ children }: any) {
       .catch(onChunkedResponseError);
   }
 
-  const handleNumer = async (type: 'chat' | 'form', paload: any) => {
+  const handleNumer = async (type: 'chat' | 'form' | 'jqpp', paload: any) => {
     const id = uuidv4()
-  
+
     const onChunkedResponseError = (err: any) => {
       console.error(err);
     };
@@ -249,7 +255,7 @@ export default function ChatProvider({ children }: any) {
           let chunk: any = decoder.decode(result.value || new Uint8Array(), {
             stream: !result.done,
           });
-          console.log('chunk',chunk)
+          console.log('chunk', chunk)
 
           let str: any = chunk.match(/<chunk>([\s\S]*?)<\/chunk>/g);
           if (str && Array.isArray(str) && str.length > 0) {
@@ -272,7 +278,7 @@ export default function ChatProvider({ children }: any) {
 
           sourceChunk += chunk
 
-          console.log('sourceChunk',sourceChunk)
+          console.log('sourceChunk', sourceChunk)
 
           updateMessage(activeChatId, id, {
             content: sourceChunk,
@@ -291,7 +297,7 @@ export default function ChatProvider({ children }: any) {
     // let body :any;
     let url: any
     let params: any
-    let source:any
+    let source: any
     if (type == 'form') {
       // 已经填入个人信息，走八字匹配接口
       if (userConverId && user_id) {
@@ -299,21 +305,21 @@ export default function ChatProvider({ children }: any) {
         params = {
           ...paload,
           user_id,
-          conversation_id:activeChat.id,
-          matcher_type:1,
-          day:paload.day ? Number(paload.day).toString() : '',
-          month:paload.month ? Number(paload.month).toString() : ''
+          conversation_id: activeChat.id,
+          matcher_type: 1,
+          day: paload.day ? Number(paload.day).toString() : '',
+          month: paload.month ? Number(paload.month).toString() : ''
         }
       } else {
         url = '/api/baziAnalysis'
         params = {
           ...paload,
-          conversation_id:activeChat.id,
-          day:paload.day ? Number(paload.day).toString() : '',
-          month:paload.month ? Number(paload.month).toString() : ''
+          conversation_id: activeChat.id,
+          day: paload.day ? Number(paload.day).toString() : '',
+          month: paload.month ? Number(paload.month).toString() : ''
         }
       }
-    } else {
+    } else if (type == 'chat') {
       // 个人聊天
       if (userConverId == activeChat.id) {
         url = '/api/chat_bazi'
@@ -324,7 +330,12 @@ export default function ChatProvider({ children }: any) {
       params = {
         ...paload,
         conversation_id: activeChat.id,
-        matcher_type:1,
+        matcher_type: 1,
+      }
+    } else {
+      url = '/api/get_bazi_info'
+      params = {
+        conversation_id: activeChat.id
       }
     }
 
@@ -333,7 +344,7 @@ export default function ChatProvider({ children }: any) {
       content: '',
       type: 'answer',
       loading: true,
-      source:type
+      source: type
     }])
 
     onScroll(400)

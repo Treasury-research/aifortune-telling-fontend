@@ -10,11 +10,11 @@ import {
 import { Router, useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
 import type { DatePickerProps } from 'antd';
-import { DatePicker, Space } from 'antd';
+import { DatePicker, Select } from 'antd';
 import useChatContext from "hooks/useChatContext";
 import dayjs from 'dayjs';
 import { userInfoStore } from "store/userInfoStore";
-import { getTimeRange } from "lib/common";
+import { getTimeRange,getCnDate } from "lib/common";
 
 export default function UserForm(props: any) {
 
@@ -44,15 +44,14 @@ export default function UserForm(props: any) {
     } = userInfoStore();
 
 
-    const dateFormat = 'YYYY/MM/DD HH';
+    const dateFormat = 'YYYY/MM/DD';
 
     const { item } = props
 
-    const onChange: DatePickerProps['onChange'] = (date, dateString) => {
-        console.log(dateString);
-    };
-
     const submitForm = () => {
+
+        let cnTime = getCnDate(item.utc,item.birthDay)
+
         if (!name || !birthDay) {
             setName(item.name)
             setSex(item.sex)
@@ -62,16 +61,17 @@ export default function UserForm(props: any) {
         updateChat(activeChatId, { name: item.name })
         updateMessage(activeChatId, item.id, { isSubmit: true })
         submitQuestion('form', {
-            year: item.birthDay.split('/')[0],
-            month: item.birthDay.split('/')[1],
-            day: item.birthDay.split('/')[2].split(' ')[0],
-            time: getTimeRange(item.birthDay.split('/')[2].split(' ')[1]),
+            year: cnTime.split('/')[0],
+            month: cnTime.split('/')[1],
+            day: cnTime.split('/')[2],
+            time: item.time,
             n: item.sex == '1' ? false : true,
         })
     }
+
     return (
         <div>
-            <div className='w-[400px] p-5 bg-[#fff] rounded-[6px]'>
+            <div className='w-[460px] p-5 bg-[#fff] rounded-[6px]'>
                 <div className='mb-3'>名字</div>
                 <Input
                     className='mb-3'
@@ -94,19 +94,63 @@ export default function UserForm(props: any) {
                     </RadioGroup>
                 </div>
                 <div className='mb-3'>出生时间</div>
-                <div className='mb-3'>
-                    <DatePicker
-                        placeholder='请输入时间'
-                        showTime
-                        disabled={item.isSubmit}
-                        value={item.birthDay ? dayjs(item.birthDay, dateFormat) : null}
-                        format={dateFormat}
-                        onChange={(date: any, dateString: any) => {
-                            console.log(dateString)
-                            updateMessage(activeChatId, item.id, { birthDay: dateString })
-                        }}
-                        style={{ 'width': '100%' }}
-                    /></div>
+                <div className='mb-3 flex items-center'>
+                    <div className='w-[28%] mr-3'>
+                        <Select value={item.utc} disabled={item.isSubmit} onChange={(e: any) => updateMessage(activeChatId, item.id, { utc: e })} style={{ 'width': '100%' }}>
+                            <option value='UTC-11:00'>UTC-11:00</option>
+                            <option value='UTC-10:00'>UTC-10:00</option>
+                            <option value='UTC-09:00'>UTC-09:00</option>
+                            <option value='UTC-08:00'>UTC-08:00</option>
+                            <option value='UTC-07:00'>UTC-07:00</option>
+                            <option value='UTC-06:00'>UTC-06:00</option>
+                            <option value='UTC-05:00'>UTC-05:00</option>
+                            <option value='UTC-04:00'>UTC-04:00</option>
+                            <option value='UTC-03:00'>UTC-03:00</option>
+                            <option value='UTC-02:00'>UTC-02:00</option>
+                            <option value='UTC-01:00'>UTC-01:00</option>
+                            <option value='UTC+00:00'>UTC+00:00</option>
+                            <option value='UTC+01:00'>UTC+01:00</option>
+                            <option value='UTC+02:00'>UTC+02:00</option>
+                            <option value='UTC+03:00'>UTC+03:00</option>
+                            <option value='UTC+04:00'>UTC+04:00</option>
+                            <option value='UTC+05:00'>UTC+05:00</option>
+                            <option value='UTC+06:00'>UTC+06:00</option>
+                            <option value='UTC+07:00'>UTC+07:00</option>
+                            <option value='UTC+08:00'>UTC+08:00</option>
+                            <option value='UTC+09:00'>UTC+09:00</option>
+                            <option value='UTC+10:00'>UTC+10:00</option>
+                            <option value='UTC+11:00'>UTC+11:00</option>
+                        </Select>
+                    </div>
+                    <div className='w-[calc(42%-24px)] mr-3'>
+                        <DatePicker
+                            placeholder='请输入时间'
+                            disabled={item.isSubmit}
+                            value={item.birthDay ? dayjs(item.birthDay, dateFormat) : null}
+                            format={dateFormat}
+                            onChange={(date: any, dateString: any) => {
+                                updateMessage(activeChatId, item.id, { birthDay: dateString })
+                            }}
+                            style={{ 'width': '100%' }}
+                        />
+                    </div>
+                    <div className='w-[30%]'>
+                        <Select value={item.time} disabled={item.isSubmit} onChange={(e: any) => updateMessage(activeChatId, item.id, { time: e })} style={{ 'width': '100%' }}>
+                            <option value='1-3'>01:00~02:59</option>
+                            <option value='3-5'>03:00~04:59</option>
+                            <option value='5-7'>05:00~06:59</option>
+                            <option value='7-9'>07:00~08:59</option>
+                            <option value='9-11'>09:00~10:59</option>
+                            <option value='11-13'>11:00~12:59</option>
+                            <option value='13-15'>13:00~14:59</option>
+                            <option value='15-17'>15:00~16:59</option>
+                            <option value='17-19'>17:00~18:59</option>
+                            <option value='19-21'>19:00~20:59</option>
+                            <option value='21-23'>21:00~22:59</option>
+                            <option value='23-1'>23:00~00:59</option>
+                        </Select>
+                    </div>
+                </div>
                 <div className='text-[#B3B3B3] text-[12px]'>首次填写信息时，默认为本人</div>
             </div>
             <Button
@@ -120,7 +164,6 @@ export default function UserForm(props: any) {
             >
                 提交
             </Button>
-
         </div>
     );
 }

@@ -17,8 +17,10 @@ import {
 import useChatContext from "hooks/useChatContext";
 import { v4 as uuidv4 } from "uuid";
 import { userInfoStore } from "store/userInfoStore";
+import { useChatStore } from "store/chatStore";
 import { useToast } from "@chakra-ui/react";
 import api, { baseURL } from "api";
+import { getCnDate } from "lib/common";
 
 export default function Numerology() {
   const {
@@ -36,8 +38,13 @@ export default function Numerology() {
     addMessage
   } = useChatContext();
   const {
-    name
+    name,
+    userConverId,
+    clearUserInfo
   } = userInfoStore();
+  const {
+    clearChatInfo
+  } = useChatStore();
   const router = useRouter();
   const toast = useToast();
 
@@ -56,10 +63,16 @@ export default function Numerology() {
       name: '',
       sex: '1', //1 男 2女
       birthDay: '',
+      time:'1-3',
+      utc:'UTC+08:00'
     }
   ]
 
   const resetConvertion = async () => {
+    if(activeChatId == userConverId){
+      clearUserInfo()
+      clearChatInfo()
+    }
     const res: any = await api.post(`${baseURL}/api/reset_chat`, {
       conversation_id: activeChatId,
     });

@@ -48,12 +48,15 @@ export default function ChatLeft(props: any) {
                     ) : (
                         <>
                             {
-                                item.source == 'form' || !item.source ? (
-                                    <div className='max-w-[calc(100vw-600px)]'>
-                                        <pre>{item.content}</pre>
+                                item.source == 'form' || item.source == 'jqpp' || !item.source ? (
+                                    <div className='max-w-[calc(100vw-900px)]'>
+                                        <pre className={`pre-item`}>{item.content}</pre>
                                     </div>
+                                    // <div className='max-w-[calc(100vw-900px)]'>
+                                    //     {item.content}
+                                    // </div>
                                 ) : (
-                                    <div className='max-w-[calc(100vw-820px)]'>
+                                    <div className='max-w-[calc(100vw-900px)]'>
                                         {item.content}
                                     </div>
                                 )
