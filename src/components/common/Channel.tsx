@@ -182,15 +182,15 @@ export default function Channel(props: any) {
                                                         id: uuidv4(),
                                                         type: 'question',
                                                         category: 'chat',
-                                                        content: '精确匹配'
+                                                        content: '精确批文'
                                                     }])
                                                     submitQuestion('jqpp', {
-                                                        message: '精确匹配'
+                                                        message: '精确批文'
                                                     })
                                                 }}
                                             >
                                                 <Icon as={MdDeleteOutline} color="#7A61DE" w="20px" />
-                                                <Text>精确匹配</Text>
+                                                <Text>精确批文</Text>
                                             </HStack>
                                         }
 

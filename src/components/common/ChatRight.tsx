@@ -5,7 +5,7 @@ import {
   Radio, RadioGroup,
   Stack,
   Button,
-  Icon
+  Avatar
 } from "@chakra-ui/react";
 import { Router, useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
@@ -63,7 +63,7 @@ export default function ChatRight(props: any) {
             <div className='max-w-[500px] p-3 bg-[#fff] rounded-[6px]'><Markdown value={item.content} /></div>
           )
         }
-        <Image className='shrink-0' src={`/images/chat/right-chat.png`} alt="" />
+        <Avatar size="md" bg="rgba(160,60,214)" />
       </div>
     </div>
   );

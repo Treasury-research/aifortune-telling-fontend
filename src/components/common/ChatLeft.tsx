@@ -16,7 +16,7 @@ export default function ChatLeft(props: any) {
     const { item } = props
     return (
         <div className='flex gap-5 items-start mb-5'>
-            <Image className='shrink-0' src={`/images/chat/left-chat.png`} alt="" />
+            <Image className='shrink-0 h-[48px] rounded-[50%]' src={`/images/logo.png`} alt="" />
             <div className='p-5 bg-[#fff] rounded-[6px] overflow-auto'>
                 {
                     item.loading ? (
