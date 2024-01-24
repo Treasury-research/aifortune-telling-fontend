@@ -157,12 +157,13 @@ export default function AssetForm(props: any) {
                         </Select>
                     </div>
                 </div>
-                <div className='mb-3'>谁可以看</div>
+                {/* <div className='mb-3'>谁可以看</div>
                 <div className='mb-3'>
                     <Select placeholder='Select option' value={item.is_public} onChange={(e: any) => updateMessage(activeChatId, item.id, { is_public: e })} style={{ 'width': '100%' }}>
                         <option value='1'>仅自己可见</option>
                         <option value='2'>全部人可见</option>
-                    </Select></div>
+                    </Select>
+                </div> */}
             </div>
             <Button
                 variant="bluePrimary"
