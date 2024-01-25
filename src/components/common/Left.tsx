@@ -43,6 +43,7 @@ export default function Left() {
                                     status: "info",
                                     isClosable: false,
                                 });
+                                router.push(`/numerology`)
                                 return
                             }
                             const chatList: any = getAllChatList()
