@@ -21,7 +21,7 @@ import { useToast } from "@chakra-ui/react";
 import api, { baseURL } from "api";
 import { IoMdAdd } from "react-icons/io";
 import moment from "moment";
-import { getTimeRange } from "lib/common";
+import { getTimeRangeFw } from "lib/common";
 
 export default function Assets() {
   const {
@@ -92,7 +92,7 @@ export default function Assets() {
           name: '',
           birthDay: '',
           is_public: '1',
-          time:'1-3',
+          time:'01:00~02:59',
           utc:'UTC+08:00'
         }
       ],
@@ -105,7 +105,7 @@ export default function Assets() {
       year: parsedDate.split('/')[0],
       month: parsedDate.split('/')[1],
       day: parsedDate.split('/')[2].split(' ')[0],
-      time: getTimeRange(parsedDate.split('/')[2].split(' ')[1]),
+      time: getTimeRangeFw(parsedDate.split('/')[2].split(' ')[1]),
       name:t[0],
       n: true,
     })

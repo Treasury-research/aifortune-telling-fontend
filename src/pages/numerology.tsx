@@ -63,7 +63,7 @@ export default function Numerology() {
       name: '',
       sex: '1', //1 男 2女
       birthDay: '',
-      time:'1-3',
+      time:'01:00~02:59',
       utc:'UTC+08:00'
     }
   ]

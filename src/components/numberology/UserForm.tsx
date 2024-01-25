@@ -14,7 +14,7 @@ import { DatePicker, Select } from 'antd';
 import useChatContext from "hooks/useChatContext";
 import dayjs from 'dayjs';
 import { userInfoStore } from "store/userInfoStore";
-import { getTimeRange,getCnDate } from "lib/common";
+import { getTimeRange, getCnDate } from "lib/common";
 
 export default function UserForm(props: any) {
 
@@ -50,8 +50,10 @@ export default function UserForm(props: any) {
 
     const submitForm = () => {
 
-        let cnTime = getCnDate(item.utc,item.birthDay)
-
+        let cnTime = getCnDate(item.utc, item.birthDay, item.time)
+        let time = getTimeRange(cnTime[1])
+        // console.log(cnTime)
+        // console.log(time)
         if (!name || !birthDay) {
             setName(item.name)
             setSex(item.sex)
@@ -61,10 +63,10 @@ export default function UserForm(props: any) {
         updateChat(activeChatId, { name: item.name })
         updateMessage(activeChatId, item.id, { isSubmit: true })
         submitQuestion('form', {
-            year: cnTime.split('/')[0],
-            month: cnTime.split('/')[1],
-            day: cnTime.split('/')[2],
-            time: item.time,
+            year: cnTime[0].split('/')[0],
+            month: cnTime[0].split('/')[1],
+            day: cnTime[0].split('/')[2],
+            time: time,
             n: item.sex == '1' ? false : true,
         })
     }
@@ -136,18 +138,18 @@ export default function UserForm(props: any) {
                     </div>
                     <div className='w-[30%]'>
                         <Select value={item.time} disabled={item.isSubmit} onChange={(e: any) => updateMessage(activeChatId, item.id, { time: e })} style={{ 'width': '100%' }}>
-                            <option value='1-3'>01:00~02:59</option>
-                            <option value='3-5'>03:00~04:59</option>
-                            <option value='5-7'>05:00~06:59</option>
-                            <option value='7-9'>07:00~08:59</option>
-                            <option value='9-11'>09:00~10:59</option>
-                            <option value='11-13'>11:00~12:59</option>
-                            <option value='13-15'>13:00~14:59</option>
-                            <option value='15-17'>15:00~16:59</option>
-                            <option value='17-19'>17:00~18:59</option>
-                            <option value='19-21'>19:00~20:59</option>
-                            <option value='21-23'>21:00~22:59</option>
-                            <option value='23-1'>23:00~00:59</option>
+                            <option value='01:00~02:59'>01:00~02:59</option>
+                            <option value='03:00~04:59'>03:00~04:59</option>
+                            <option value='05:00~06:59'>05:00~06:59</option>
+                            <option value='07:00~08:59'>07:00~08:59</option>
+                            <option value='09:00~10:59'>09:00~10:59</option>
+                            <option value='11:00~12:59'>11:00~12:59</option>
+                            <option value='13:00~14:59'>13:00~14:59</option>
+                            <option value='15:00~16:59'>15:00~16:59</option>
+                            <option value='17:00~18:59'>17:00~18:59</option>
+                            <option value='19:00~20:59'>19:00~20:59</option>
+                            <option value='21:00~22:59'>21:00~22:59</option>
+                            <option value='23:00~00:59'>23:00~00:59</option>
                         </Select>
                     </div>
                 </div>
