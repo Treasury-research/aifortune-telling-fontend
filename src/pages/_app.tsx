@@ -24,10 +24,10 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   // 判断标记不存在或不同就清除历史记录及重新登录
   useEffect(() => {
     const deleteHis: any = localStorage.getItem("deleteHis");
-    if (!deleteHis || deleteHis !== "1") {
+    if (!deleteHis || deleteHis !== "2") {
       clearUserInfo();
       clearChatInfo();
-      localStorage.setItem("deleteHis", "1");
+      localStorage.setItem("deleteHis", "2");
     }
   }, []);
 
