@@ -7,7 +7,7 @@ module.exports =
         return [
           {
             source: '/',
-            destination: '/numerology',
+            destination: '/home',
             permanent: true,
           }
         ]

@@ -56,6 +56,7 @@
     "react-contenteditable": "^3.3.7",
     "react-datetime": "^3.2.0",
     "react-dom": "^18.2.0",
+    "react-fullpage": "^0.1.19",
     "react-icons": "^4.10.1",
     "react-jazzicon": "^1.0.4",
     "react-responsive-carousel": "^3.2.23",
