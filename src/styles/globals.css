@@ -221,28 +221,7 @@ div.word {
   display: none;
 }
 
-.section {
-  transition: transform 0.5s ease-in-out; /* 添加过渡效果 */  
-}  
 
-section {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  scroll-snap-align: center;
-  perspective: 500px;
-}
-
-section > div {
-  height: 100%;
-  position: relative;
-  max-height:100%;
-  margin: 20px;
-  background: var(--white);
-  overflow: hidden;
-}
 
 .Navigation-Anchor{
   background:#CEB5A6 !important;

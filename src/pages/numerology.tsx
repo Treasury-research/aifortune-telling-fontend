@@ -111,8 +111,8 @@ export default function Numerology() {
     <>
       <div className='w-full h-full flex'>
         <div className='w-[120px] h-full bg-[#E4DFF8]'>
-          <div className='w-[50px] mx-auto mt-5 mb-10 h-[50px]'>
-            <Image className='shrink-0' src={`/images/logo.png`} alt="" />
+          <div className='w-[50px] mx-auto mt-5 mb-10 h-[50px]' onClick={() => router.push('/home')}>
+            <Image className='shrink-0 cursor-pointer' src={`/images/logo.png`} alt="" />
           </div>
           <Left />
         </div>

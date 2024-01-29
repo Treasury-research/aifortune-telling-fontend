@@ -49,6 +49,7 @@ export default function ChatProvider({ children }: any) {
   const [section, setSection] = useState(router.pathname.split("/")[1]);
   const { onOpen, onClose, isOpen } = useDisclosure();
   const [input, setInput] = useState("");
+  const [isDone, setIsDone] = useState(true);
 
   let activeChat: any = getActiveChat();
   const activeMessages: any = getActiveChatMessages();
@@ -144,7 +145,7 @@ export default function ChatProvider({ children }: any) {
     onScroll(400)
 
     const onChunkedResponseError = (err: any) => {
-      console.error(err);
+      setIsDone(true)
     };
 
     const processChunkedResponse = (response: any) => {
@@ -176,7 +177,7 @@ export default function ChatProvider({ children }: any) {
 
           // console.log("chunk1", chunk);
           if (result.done) {
-            console.log(result)
+            setIsDone(true)
           } else {
             return readChunk();
           }
@@ -210,7 +211,7 @@ export default function ChatProvider({ children }: any) {
         conversation_id: activeChat.id
       }
     }
-
+    setIsDone(false)
     await fetch(`${baseURL}${url}`, {
       method: "POST",
       headers: {
@@ -234,6 +235,7 @@ export default function ChatProvider({ children }: any) {
 
     const onChunkedResponseError = (err: any) => {
       console.error(err);
+      setIsDone(true)
     };
 
     const processChunkedResponse = (response: any) => {
@@ -287,7 +289,7 @@ export default function ChatProvider({ children }: any) {
 
           // console.log("chunk1", chunk);
           if (result.done) {
-            console.log(result)
+            setIsDone(true)
           } else {
             return readChunk();
           }
@@ -352,7 +354,7 @@ export default function ChatProvider({ children }: any) {
     // await api.post(`${baseURL}/api/assets_select`, {
     //   user_id:'',
     // });
-
+    setIsDone(false)
     await fetch(`${baseURL}${url}`, {
       method: "POST",
       headers: {
@@ -395,7 +397,9 @@ export default function ChatProvider({ children }: any) {
         updateMessage,
         submitQuestion,
         addMessage,
-        getAssets
+        getAssets,
+        setIsDone,
+        isDone
       }}
     >
       {children}
