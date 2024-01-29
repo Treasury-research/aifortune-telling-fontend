@@ -26,7 +26,7 @@ export default function Home() {
         <div className="moving-3"></div>
       </div>
       <div className='h-[60px] fixed top-0 left-0 flex items-center justify-between w-full z-20'>
-          <Image src={`/home/logo.png`} className="h-10 ml-5" alt="" />
+          <Image src={`/home/Logo.png`} className="h-10 ml-5" alt="" />
           <Image src={`/home/head.png`} alt="" />
           <Image src={`/home/start.png`} className="hover:opacity-70 cursor-pointer mr-5" alt="" onClick={() => router.push('/numerology')}/>
         </div>
