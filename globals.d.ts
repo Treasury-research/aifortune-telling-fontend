@@ -4,3 +4,4 @@ interface Window {
 }
 
 declare module "stompjs/lib/stomp";
+declare module "react-fullpage";
