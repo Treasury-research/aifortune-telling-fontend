@@ -16,6 +16,7 @@
     "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
+    "@fullpage/react-fullpage": "^0.1.40",
     "@types/msgpack-lite": "^0.1.8",
     "@types/node": "^18.15.11",
     "@types/prismjs": "^1.26.0",
