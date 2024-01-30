@@ -188,7 +188,7 @@ div.word {
 }
 
 .rotate-forever {  
-  animation: spin 10s linear infinite;  
+  animation: spin 15s linear infinite;  
 }
 
 @keyframes spin1 {  
@@ -201,7 +201,7 @@ div.word {
 }
 
 .rotate-forever1 {  
-  animation: spin1 10s linear infinite;  
+  animation: spin1 15s linear infinite;  
 }
 
 @keyframes xs {  
