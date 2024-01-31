@@ -73,7 +73,7 @@ html,body{
   background-repeat: no-repeat;
   background-position: center;
   background-blend-mode: darken; */
-  background:rgba(0, 0, 0, 0.5) url("../../public/home/bg.png") no-repeat center center;
+  background:rgba(0, 0, 0, 0.5) url("../../public/home/bg.jpg") no-repeat center center;
 }
 
 div.starfield {
