@@ -74,13 +74,13 @@ export default function UserForm(props: any) {
     return (
         <div>
             <div className='w-[460px] p-5 bg-[#fff] rounded-[6px]'>
-                <div className='mb-3'>名字</div>
+                <div className='mb-3'>姓名</div>
                 <Input
                     className='mb-3'
                     size="sm"
                     isDisabled={item.isSubmit}
                     width="100%"
-                    placeholder="请输入名字"
+                    placeholder="请输入姓名"
                     _focusVisible={{ border: "1px solid #ddd" }}
                     bg="transparent"
                     value={item.name}
