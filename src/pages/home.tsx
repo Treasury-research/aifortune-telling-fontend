@@ -32,7 +32,7 @@ export default function Home() {
       </div>
       <div className='h-[60px] fixed top-0 left-0 flex items-center justify-between w-full z-40'>
         <Image src={`/home/Logo.png`} className="h-10 ml-5" alt="" />
-        <Image src={`/home/head.png`} alt="" />
+        <Image src={`/home/FAQ.png`} alt="" className='cursor-pointer hover:opacity-70'/>
         <Image src={`/home/start.png`} className="hover:opacity-70 cursor-pointer mr-10" alt="" onClick={() => router.push('/numerology')} />
       </div>
       <div className='absolute left-0 top-0 w-full h-full z-30 overflow-auto'>
@@ -71,7 +71,7 @@ export default function Home() {
             <div className='h-[80%] relative'>
               <Image src={`/home/r10.png`} className="h-full" alt="" />
               <Image src={`/home/r11.png`} className='absolute right-10 bottom-20 cursor-pointer hover:opacity-70' alt="" />
-              <Image src={`/home/r12.png`} className='absolute right-10 bottom-10 cursor-pointer hover:opacity-70' alt="" />
+              {/* <Image src={`/home/r12.png`} className='absolute right-10 bottom-10 cursor-pointer hover:opacity-70' alt="" /> */}
             </div>
           </div>
         </div>
