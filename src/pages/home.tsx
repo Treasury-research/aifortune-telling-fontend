@@ -31,9 +31,14 @@ export default function Home() {
         <div className="moving-3"></div>
       </div>
       <div className='h-[60px] fixed top-0 left-0 flex items-center justify-between w-full z-40'>
-        <Image src={`/home/Logo.png`} className="h-10 ml-5" alt="" />
-        <Image src={`/home/FAQ.png`} alt="" className='cursor-pointer hover:opacity-70'/>
-        <Image src={`/home/start.png`} className="hover:opacity-70 cursor-pointer mr-10" alt="" onClick={() => router.push('/numerology')} />
+        <div className='flex h-10 ml-5 items-center'>
+        
+        <Image src={`/home/logo.svg`} className="mr-5 h-10" alt="" />
+        <Image src={`/home/aistar1.png`} className="h-6" alt="" />
+        </div>
+        <Image src={`/home/start.png`} className="hover:opacity-70 cursor-pointer ml-[-126px]" alt="" onClick={() => router.push('/numerology')} />
+        <Image src={`/home/FAQ.png`} alt="" className='cursor-pointer hover:opacity-70 mr-10'/>
+        
       </div>
       <div className='absolute left-0 top-0 w-full h-full z-30 overflow-auto'>
 
