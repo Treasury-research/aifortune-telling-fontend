@@ -35,6 +35,16 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   return (
     <ChatProvider>
       <ChakraProvider theme={customTheme}>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-S9HQ9CWY45"></script>
+        <script>
+          {`
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+  
+    gtag('config', 'G-S9HQ9CWY45');
+  `}
+        </script>
         <div className="w-full h-full">
           <Component {...pageProps} className="flex-1" />
         </div>
