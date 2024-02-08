@@ -37,7 +37,7 @@ export default function Home() {
         <Image src={`/home/aistar1.png`} className="h-6" alt="" />
         </div>
         <Image src={`/home/start.png`} className="hover:opacity-70 cursor-pointer ml-[-126px]" alt="" onClick={() => router.push('/numerology')} />
-        <Image src={`/home/FAQ.png`} alt="" className='cursor-pointer hover:opacity-70 mr-10'/>
+        <Image src={`/home/FAQ.png`} alt="" className='cursor-pointer hover:opacity-70 mr-10' onClick={() => window.open('https://zendaoai.notion.site/FAQ-4fcbb95a7bc84cb18b3c790a2620ccba?pvs=4','_blank')}/>
         
       </div>
       <div className='absolute left-0 top-0 w-full h-full z-30 overflow-auto'>
