@@ -1,5 +1,5 @@
 import axios from "axios";
-export const baseURL = 'https://api.zendao.ai';
+export const baseURL = 'https://ai-fortune.staging.knn3.xyz';
 
 const api = axios.create({
   baseURL,
