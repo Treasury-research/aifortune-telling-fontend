@@ -357,6 +357,7 @@ export default function ChatProvider({ children }: any) {
 		//   user_id:'',
 		// });
 		setIsDone(false);
+    console.log("baseURL", baseURL);
 		await fetch(`${baseURL}${url}`, {
 			method: "POST",
 			headers: {
