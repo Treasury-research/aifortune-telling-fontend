@@ -59,9 +59,6 @@ export default function ChatLeft(props: any) {
 								></pre>
 							</div>
 						) : (
-							// <div className='max-w-[calc(100vw-900px)]'>
-							//     {item.content}
-							// </div>
 							<div
 								className="max-w-[calc(100vw-900px)]"
 								dangerouslySetInnerHTML={{ __html: item.content }}
