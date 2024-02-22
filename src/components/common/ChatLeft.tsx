@@ -1,13 +1,5 @@
 import React, { useEffect } from "react";
-import {
-	Image,
-	Skeleton,
-	Radio,
-	RadioGroup,
-	Stack,
-	Button,
-	Icon,
-} from "@chakra-ui/react";
+import { Image, Skeleton, Box, Icon } from "@chakra-ui/react";
 import { Router, useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
 import { Markdown } from "./MarkDown";
@@ -53,18 +45,16 @@ export default function ChatLeft(props: any) {
 					<>
 						{item.source == "form" || item.source == "jqpp" || !item.source ? (
 							<div className="max-w-[calc(100vw-900px)]">
-								<pre
+								<Box
 									className={`pre-item`}
 									dangerouslySetInnerHTML={{ __html: item.content }}
-								></pre>
+								/>
 							</div>
 						) : (
-							<div
+							<Box
 								className="max-w-[calc(100vw-900px)]"
 								dangerouslySetInnerHTML={{ __html: item.content }}
-							>
-								{item.content}
-							</div>
+							/>
 						)}
 					</>
 				)}
