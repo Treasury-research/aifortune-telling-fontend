@@ -1,33 +1,29 @@
 import axios from "axios";
-import { isProduction } from "lib/common";
 
-export const baseURL = isProduction
-	? "https://api.zendao.ai"
-	: "https://ai-fortune.staging.knn3.xyz";
+export const baseURL = process.env.NEXT_PUBLIC_DOMAIN;
 
 const api = axios.create({
-  baseURL,
-  retry: 1,
+	baseURL,
+	retry: 1,
 } as any);
 
 api.interceptors.request.use(
-  (config) => {
-    // config.headers.authorization = jwt ? `Bearer ${jwt}` : "";
-    return config;
-  },
-  (err) => {
-    return Promise.reject(err);
-  }
+	(config) => {
+		// config.headers.authorization = jwt ? `Bearer ${jwt}` : "";
+		return config;
+	},
+	(err) => {
+		return Promise.reject(err);
+	}
 );
 
 api.interceptors.response.use(
-  (res: any) => {
-    if (res.status === 200) {
-      return res.data;
-    }
-  },
-  (error: any) => {
-  }
+	(res: any) => {
+		if (res.status === 200) {
+			return res.data;
+		}
+	},
+	(error: any) => {}
 );
 
 export default api;
