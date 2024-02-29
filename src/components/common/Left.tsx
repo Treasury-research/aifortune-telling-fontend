@@ -5,18 +5,17 @@ import { userInfoStore } from "store/userInfoStore";
 import { useToast } from "@chakra-ui/react";
 import { useChatStore } from "store/chatStore";
 
-const tabs = [
-	{
-		name: "命理",
-		img: "ml",
-		router: "numerology",
-	},
-	// {
-	//     name: '资产',
-	//     img: 'zc',
-	//     router: 'assets'
-	// }
-];
+const tabs = [{
+    name: '命理',
+    img: 'ml',
+    router: 'numerology'
+},
+// {
+//     name: '资产',
+//     img: 'zc',
+//     router: 'assets'
+// }
+]
 
 export default function Left() {
 	const router = useRouter();
