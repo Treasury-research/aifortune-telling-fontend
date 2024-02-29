@@ -12,11 +12,12 @@ const tabs = [{
     img: 'ml',
     router: 'numerology'
 },
-{
-    name: '资产',
-    img: 'zc',
-    router: 'assets'
-}]
+// {
+//     name: '资产',
+//     img: 'zc',
+//     router: 'assets'
+// }
+]
 
 export default function Left() {
     const router = useRouter();
