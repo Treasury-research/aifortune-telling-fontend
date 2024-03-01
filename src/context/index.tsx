@@ -93,7 +93,7 @@ export default function ChatProvider({ children }: any) {
 	}, [section, chatById, activeChatId]);
 
 	const getAssets = async () => {
-		const res: any = await api.post(`${baseURL}/api/assets_select`, {
+		const res: any = await api.post(`/api/assets_select`, {
 			user_id,
 		});
 		if (res && res.length > 0 && res[0].data && res[0].data.length > 0) {
@@ -131,20 +131,15 @@ export default function ChatProvider({ children }: any) {
 
 	const handleAsset = async (type: "chat" | "form" | "jqpp", paload: any) => {
 		const id = uuidv4();
-		addMessage(activeChatId, [
-			{
-				id,
-				content: "",
-				type: "answer",
-				loading: true,
-				source: type,
-			},
-		]);
 
-		onScroll(400);
+		// onScroll(400);
 
 		const onChunkedResponseError = (err: any) => {
 			setIsDone(true);
+			updateMessage(activeChatId, id, {
+				content: "Message error",
+				loading: false,
+			});
 		};
 
 		const processChunkedResponse = (response: any) => {
@@ -168,10 +163,15 @@ export default function ChatProvider({ children }: any) {
 
 					sourceChunk += chunk;
 
-					updateMessage(activeChatId, id, {
-						content: sourceChunk,
-						loading: false,
-					});
+					addMessage(activeChatId, [
+						{
+							id,
+							content: sourceChunk,
+							type: "answer",
+							loading: false,
+							source: type,
+						},
+					]);
 
 					// console.log("chunk1", chunk);
 					if (result.done) {
@@ -210,6 +210,9 @@ export default function ChatProvider({ children }: any) {
 			};
 		}
 		setIsDone(false);
+		// const res: any = await api.post(url, {
+		// 	user_id,
+		// });
 		await fetch(`${baseURL}${url}`, {
 			method: "POST",
 			headers: {
@@ -353,14 +356,11 @@ export default function ChatProvider({ children }: any) {
 
 		onScroll(400);
 
-		// await api.post(`${baseURL}/api/assets_select`, {
-		//   user_id:'',
-		// });
 		setIsDone(false);
-    console.log("baseURL", baseURL);
 		await fetch(`${baseURL}${url}`, {
 			method: "POST",
 			headers: {
+				Lang: navigator.language.startsWith("en") ? "En" : "Cn",
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({

@@ -42,7 +42,7 @@ export default function UserForm(props: any) {
 
 	const dateFormat = "YYYY/MM/DD";
 
-	const { item } = props;
+	const { item, setIsSubmitUser } = props;
 
 	const submitForm = () => {
 		let cnTime = getCnDate(item.utc, item.birthDay, item.time);

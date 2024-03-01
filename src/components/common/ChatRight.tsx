@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
 	Image,
 	Input,
 	Radio,
-	RadioGroup,
-	Stack,
-	Button,
+	Skeleton,
+	Text,
+	Flex,
 	Avatar,
+	VStack,
 } from "@chakra-ui/react";
 import { Router, useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
@@ -37,11 +38,22 @@ export default function ChatRight(props: any) {
 	} = useChatContext();
 
 	const { name, birthDay, setName, setSex, setBirthDay } = userInfoStore();
+	const { item, index } = props;
 
-	const { item } = props;
+	const loadContent = useMemo(() => {
+		const msgItem = activeChat.messages[index + 1];
+		return msgItem?.content;
+	}, [activeChat, index]);
+
+	const showContent = useMemo(() => {
+		return (
+			(item.category === "form" && item.isSubmit && !loadContent) ||
+			(item.category === "chat" && !loadContent)
+		);
+	}, [item, loadContent]);
 
 	return (
-		<div className="flex">
+		<VStack alignItems="flex-end" mb={5}>
 			<div className="flex gap-5 items-start ml-auto mb-5">
 				{item.category == "form" ? (
 					<>
@@ -58,6 +70,26 @@ export default function ChatRight(props: any) {
 				)}
 				<Avatar size="md" bg="rgba(160,60,214)" />
 			</div>
-		</div>
+			{showContent && (
+				<Flex w="full" className="flex gap-5 items-start ">
+					<Image
+						className="shrink-0 h-[48px] rounded-[50%]"
+						src={`/images/logo.png`}
+						alt=""
+					/>
+					<div className="p-5 bg-[#fff] rounded-[6px] overflow-auto">
+						<Text>正在计算中.....</Text>
+						<Skeleton
+							height="10px"
+							my={1}
+							w={"400px"}
+							startColor="#F3F3F3"
+							endColor="#DFDFDF"
+							borderRadius={"8px"}
+						/>
+					</div>
+				</Flex>
+			)}
+		</VStack>
 	);
 }

@@ -15,48 +15,44 @@ export default function ChatLeft(props: any) {
 				alt=""
 			/>
 			<div className="p-5 bg-[#fff] rounded-[6px] overflow-auto">
-				{item.loading ? (
-					<>
-						<Skeleton
-							height="16px"
-							mb={2}
-							w={"400px"}
-							startColor="#F3F3F3"
-							endColor="#DFDFDF"
-							borderRadius={"8px"}
+				{/* <>
+					<Skeleton
+						height="16px"
+						mb={2}
+						w={"400px"}
+						startColor="#F3F3F3"
+						endColor="#DFDFDF"
+						borderRadius={"8px"}
+					/>
+					<Skeleton
+						height="16px"
+						mb={2}
+						w={"380px"}
+						startColor="#F3F3F3"
+						endColor="#DFDFDF"
+						borderRadius={"8px"}
+					/>
+					<Skeleton
+						height="16px"
+						w={"360px"}
+						startColor="#F3F3F3"
+						endColor="#DFDFDF"
+						borderRadius={"8px"}
+					/>
+				</> */}
+
+				{item.source == "form" || item.source == "jqpp" || !item.source ? (
+					<div className="max-w-[calc(100vw-900px)]">
+						<Box
+							className={`pre-item`}
+							dangerouslySetInnerHTML={{ __html: item.content }}
 						/>
-						<Skeleton
-							height="16px"
-							mb={2}
-							w={"380px"}
-							startColor="#F3F3F3"
-							endColor="#DFDFDF"
-							borderRadius={"8px"}
-						/>
-						<Skeleton
-							height="16px"
-							w={"360px"}
-							startColor="#F3F3F3"
-							endColor="#DFDFDF"
-							borderRadius={"8px"}
-						/>
-					</>
+					</div>
 				) : (
-					<>
-						{item.source == "form" || item.source == "jqpp" || !item.source ? (
-							<div className="max-w-[calc(100vw-900px)]">
-								<Box
-									className={`pre-item`}
-									dangerouslySetInnerHTML={{ __html: item.content }}
-								/>
-							</div>
-						) : (
-							<Box
-								className="max-w-[calc(100vw-900px)]"
-								dangerouslySetInnerHTML={{ __html: item.content }}
-							/>
-						)}
-					</>
+					<Box
+						className="max-w-[calc(100vw-900px)]"
+						dangerouslySetInnerHTML={{ __html: item.content }}
+					/>
 				)}
 			</div>
 		</div>

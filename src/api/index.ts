@@ -9,7 +9,7 @@ const api = axios.create({
 
 api.interceptors.request.use(
 	(config) => {
-		// config.headers.authorization = jwt ? `Bearer ${jwt}` : "";
+		config.headers.Lang = navigator.language.startsWith("en") ? "En" : "Cn";
 		return config;
 	},
 	(err) => {
