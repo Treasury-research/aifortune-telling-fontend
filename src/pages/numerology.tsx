@@ -39,14 +39,14 @@ export default function Numerology() {
 		addMessage,
 	} = useChatContext();
 	const { name, userConverId, clearUserInfo } = userInfoStore();
-	const { clearChatInfo } = useChatStore();
+	const { clearChatInfo, lang } = useChatStore();
 	const router = useRouter();
 	const toast = useToast();
 
 	const resetConver = [
 		{
 			id: uuidv4(),
-			content: "请填写以下个人信息，以便占卜师为您预测运势~",
+			content: lang === "CN" ? "请填写以下个人信息，以便占卜师为您预测运势~" : "Please fill in the following personal information~",
 			type: "answer",
 			loading: false,
 		},
@@ -88,7 +88,7 @@ export default function Numerology() {
 			timestamp: timestamp,
 			section,
 			messages: [...resetConver],
-			name: `新的占卜 ${time}`,
+			name: `${lang === "CN" ? "新的占卜" : "New Five Elements"} ${time}`,
 		};
 
 		addChat(newChat);
@@ -118,7 +118,9 @@ export default function Numerology() {
 					<Left />
 				</div>
 				<div className="w-[300px] h-full px-5 py-10 overflow-auto no-scrollbar">
-					<div className="text-[20px] font-bold mb-10">命理占卜</div>
+					<div className="text-[20px] font-bold mb-10">
+						{lang === "CN" ? "命理占卜" : "Five Elements"}
+					</div>
 					<Channel resetConvertion={() => resetConvertion()} />
 					<div
 						className="w-full h-10 cursor-pointer px-5"
@@ -137,13 +139,14 @@ export default function Numerology() {
 							createNewChat();
 						}}
 					>
-						<span className="text-[20px] font-bold">+</span> 新的占卜
+						<span className="text-[20px] font-bold">+</span>
+						{lang === "CN" ? " 新的占卜" : " New Five Elements "}
 					</div>
 				</div>
 
 				<div className="w-[calc(100%-280px)] h-full pr-5">
 					<div className="h-20 flex items-center text-[18px] font-bold">
-						{activeChat ? activeChat.name : ""}
+						# {activeChat ? activeChat.name : ""}
 					</div>
 					<div className="w-full h-[calc(100%-80px)] bg-[#F3F4F6] rounded-[10px] pt-10 px-10">
 						<div
@@ -155,7 +158,7 @@ export default function Numerology() {
 									{activeChat.messages.map((t: any, i: number) => (
 										<div key={i}>
 											{t.type == "answer" && t.content && <ChatLeft item={t} />}
-											{t.type == "question" && <ChatRight item={t} index={i}/>}
+											{t.type == "question" && <ChatRight item={t} index={i} />}
 										</div>
 									))}
 								</>

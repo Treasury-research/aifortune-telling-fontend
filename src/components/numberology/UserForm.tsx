@@ -13,6 +13,7 @@ import useChatContext from "hooks/useChatContext";
 import dayjs from "dayjs";
 import { userInfoStore } from "store/userInfoStore";
 import { getTimeRange, getCnDate } from "lib/common";
+import { useChatStore } from "store/chatStore";
 
 export default function UserForm(props: any) {
 	const {
@@ -29,6 +30,7 @@ export default function UserForm(props: any) {
 		updateMessage,
 		submitQuestion,
 	} = useChatContext();
+	const { lang } = useChatStore();
 
 	const {
 		name,
@@ -37,6 +39,7 @@ export default function UserForm(props: any) {
 		setSex,
 		setBirthDay,
 		userConverId,
+
 		setUserConverId,
 	} = userInfoStore();
 
@@ -69,13 +72,13 @@ export default function UserForm(props: any) {
 	return (
 		<div>
 			<div className="w-[460px] p-5 bg-[#fff] rounded-[6px]">
-				<div className="mb-3">姓名</div>
+				<div className="mb-3">{lang === "CN" ? "姓名" : "Name"}</div>
 				<Input
 					className="mb-3"
 					size="sm"
 					isDisabled={item.isSubmit}
 					width="100%"
-					placeholder="请输入姓名"
+					placeholder={lang === "CN" ? "请输入姓名" : "Please fill your name"}
 					_focusVisible={{ border: "1px solid #ddd" }}
 					bg="transparent"
 					value={item.name}
@@ -83,7 +86,7 @@ export default function UserForm(props: any) {
 						updateMessage(activeChatId, item.id, { name: e.target.value })
 					}
 				/>
-				<div className="mb-3">性别</div>
+				<div className="mb-3">{lang === "CN" ? "性别" : "Gender"}</div>
 				<div className="mb-3">
 					<RadioGroup
 						isDisabled={item.isSubmit}
@@ -92,15 +95,17 @@ export default function UserForm(props: any) {
 					>
 						<Stack direction="row" gap={10}>
 							<Radio value={"1"} colorScheme="purple">
-								男
+								{lang === "CN" ? "男" : "Male"}
 							</Radio>
 							<Radio value={"2"} colorScheme="purple">
-								女
+								{lang === "CN" ? "女" : "Female"}
 							</Radio>
 						</Stack>
 					</RadioGroup>
 				</div>
-				<div className="mb-3">出生时间</div>
+				<div className="mb-3">
+					{lang === "CN" ? "出生时间" : "Date Of Birth"}
+				</div>
 				<div className="mb-3 flex items-center">
 					<div className="w-[28%] mr-3">
 						<Select
@@ -138,7 +143,7 @@ export default function UserForm(props: any) {
 					</div>
 					<div className="w-[calc(42%-24px)] mr-3">
 						<DatePicker
-							placeholder="请输入时间"
+							placeholder={lang === "CN" ? "请输入时间" : "Fill time"}
 							disabled={item.isSubmit}
 							value={item.birthDay ? dayjs(item.birthDay, dateFormat) : null}
 							format={dateFormat}
@@ -175,7 +180,9 @@ export default function UserForm(props: any) {
 					</div>
 				</div>
 				<div className="text-[#B3B3B3] text-[12px]">
-					首次填写信息时，默认为本人
+					{lang === "CN"
+						? "首次填写信息时，默认为本人"
+						: "When you fill in the information for the first time, the default is the person"}
 				</div>
 			</div>
 			<Button
@@ -187,7 +194,7 @@ export default function UserForm(props: any) {
 				borderRadius={4}
 				onClick={() => submitForm()}
 			>
-				提交
+				{lang === "CN" ? "提交" : "Submit"}
 			</Button>
 		</div>
 	);

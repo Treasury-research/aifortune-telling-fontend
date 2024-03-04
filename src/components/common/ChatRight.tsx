@@ -18,10 +18,11 @@ import { userInfoStore } from "store/userInfoStore";
 import UserForm from "./../numberology/UserForm";
 import AssetForm from "./../assets/AssetForm";
 import { Markdown } from "./MarkDown";
+import { useChatStore } from "store/chatStore";
 
 export default function ChatRight(props: any) {
 	const router = useRouter();
-
+	const { lang } = useChatStore();
 	const {
 		setActiveChatId,
 		activeChatId,
@@ -78,7 +79,11 @@ export default function ChatRight(props: any) {
 						alt=""
 					/>
 					<div className="p-5 bg-[#fff] rounded-[6px] overflow-auto">
-						<Text>正在计算中.....</Text>
+						<Text>
+							{lang === "CN"
+								? "正在计算中....."
+								: "Calculations in progress....."}
+						</Text>
 						<Skeleton
 							height="10px"
 							my={1}

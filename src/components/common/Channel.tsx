@@ -93,7 +93,7 @@ export default function Channel(props: any) {
                                     />
                                 </div>
                             ) : (
-                                <div className='truncate'>{t.name}</div>
+                                <div className='truncate'># {t.name}</div>
                             )
                         }
                         <div className={`invisible group-hover:visible`}>

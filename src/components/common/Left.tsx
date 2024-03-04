@@ -1,34 +1,36 @@
 import React, { useEffect } from "react";
-import { Image } from "@chakra-ui/react";
+import { Image, Text, VStack } from "@chakra-ui/react";
 import { Router, useRouter } from "next/router";
 import { userInfoStore } from "store/userInfoStore";
 import { useToast } from "@chakra-ui/react";
 import { useChatStore } from "store/chatStore";
 
-const tabs = [{
-    name: '命理',
-    img: 'ml',
-    router: 'numerology'
-},
-// {
-//     name: '资产',
-//     img: 'zc',
-//     router: 'assets'
-// }
-]
-
 export default function Left() {
 	const router = useRouter();
 	const toast = useToast();
 	const { name } = userInfoStore();
-	const { getAllChatList } = useChatStore();
+	const { getAllChatList, lang } = useChatStore();
+
+	const tabs = [
+		{
+			name: lang === "CN" ? "命理" : "Five Elements",
+			img: "ml",
+			router: "numerology",
+		},
+		// {
+		//     name: '资产',
+		//     img: 'zc',
+		//     router: 'assets'
+		// }
+	];
 
 	return (
 		<div className="w-full">
 			{tabs.map((t: any, i: number) => (
-				<div
+				<VStack
 					key={i}
-					className="w-10 mx-auto text-center rounded-[50%] background-[#fff] cursor-pointer mb-5"
+					w="full"
+					className="rounded-[50%] background-[#fff] cursor-pointer mb-5"
 					onClick={() => {
 						if (!name) {
 							toast({
@@ -59,7 +61,7 @@ export default function Left() {
 					}}
 				>
 					<div
-						className={`w-10 h-10 flex items-center justify-center mx-auto mb-2 ${
+						className={`w-10 h-10 flex items-center justify-center ${
 							router.pathname.includes(t.router) ? "bg-[#EFECFB]" : ""
 						} rounded-[50%]`}
 					>
@@ -70,8 +72,8 @@ export default function Left() {
 							alt=""
 						/>
 					</div>
-					<span>{t.name}</span>
-				</div>
+					<Text whiteSpace="nowrap">{t.name}</Text>
+				</VStack>
 			))}
 		</div>
 	);

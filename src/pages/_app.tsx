@@ -16,11 +16,9 @@ import locale from "antd/locale/zh_CN";
 import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 
-dayjs.locale("zh-cn");
-
 const MyApp = ({ Component, pageProps }: AppProps) => {
 	const { name, userConverId, clearUserInfo } = userInfoStore();
-	const { clearChatInfo } = useChatStore();
+	const { clearChatInfo, setLang } = useChatStore();
 
 	// 判断标记不存在或不同就清除历史记录及重新登录
 	useEffect(() => {
@@ -30,6 +28,13 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 			clearChatInfo();
 			localStorage.setItem("deleteHis", "2");
 		}
+	}, []);
+
+	useEffect(() => {
+		const lang = navigator.language.startsWith("en") ? "EN" : "CN";
+		lang === "CN" ? dayjs.locale("zh-cn") : dayjs.locale("en");
+		console.log("lang:", lang)
+		setLang(lang);
 	}, []);
 
 	return (
