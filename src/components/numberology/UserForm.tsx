@@ -39,7 +39,6 @@ export default function UserForm(props: any) {
 		setSex,
 		setBirthDay,
 		userConverId,
-
 		setUserConverId,
 	} = userInfoStore();
 
