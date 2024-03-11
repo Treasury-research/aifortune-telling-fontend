@@ -122,16 +122,35 @@ export default function ChatProvider({ children }: any) {
 		type: "chat" | "form" | "jqpp",
 		paload: any
 	) => {
+		const id = uuidv4();
 		if (section == "numerology") {
-			handleNumer(type, paload);
+			handleNumer(type, paload, id);
 		} else {
-			handleAsset(type, paload);
+			handleAsset(type, paload, id);
+		}
+		handleRecommdend(paload, id);
+	};
+
+	const handleRecommdend = async (paload: any, id: string) => {
+		const res: any = await api.post(`${baseURL}/api/question_rec`, {
+			conversation_id: activeChat.id,
+			...paload,
+		});
+
+		console.log(res);
+		if (res && res.length > 0 && res[0].data && res[0].data.length > 0) {
+			updateMessage(activeChatId, id, {
+				recommends: res[0].data || [],
+			});
 		}
 	};
 
-	const handleAsset = async (type: "chat" | "form" | "jqpp", paload: any) => {
-		const id = uuidv4();
-
+	const handleAsset = async (
+		type: "chat" | "form" | "jqpp",
+		paload: any,
+		id: string
+	) => {
+		// const id = uuidv4();
 		// onScroll(400);
 
 		const onChunkedResponseError = (err: any) => {
@@ -231,8 +250,12 @@ export default function ChatProvider({ children }: any) {
 			.catch(onChunkedResponseError);
 	};
 
-	const handleNumer = async (type: "chat" | "form" | "jqpp", paload: any) => {
-		const id = uuidv4();
+	const handleNumer = async (
+		type: "chat" | "form" | "jqpp",
+		paload: any,
+		id: string
+	) => {
+		// const id = uuidv4();
 		const onChunkedResponseError = (err: any) => {
 			console.error(err);
 			setIsDone(true);

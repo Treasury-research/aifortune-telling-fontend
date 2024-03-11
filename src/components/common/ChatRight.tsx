@@ -3,11 +3,13 @@ import {
 	Image,
 	Input,
 	Radio,
+	Box,
 	Skeleton,
 	Text,
 	Flex,
 	Avatar,
 	VStack,
+	HStack,
 } from "@chakra-ui/react";
 import { Router, useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
@@ -19,6 +21,7 @@ import UserForm from "./../numberology/UserForm";
 import AssetForm from "./../assets/AssetForm";
 import { Markdown } from "./MarkDown";
 import { useChatStore } from "store/chatStore";
+import { BeatLoader } from "react-spinners";
 
 export default function ChatRight(props: any) {
 	const router = useRouter();
@@ -78,21 +81,23 @@ export default function ChatRight(props: any) {
 						src={`/images/logo.png`}
 						alt=""
 					/>
-					<div className="p-5 bg-[#fff] rounded-[6px] overflow-auto">
-						<Text>
-							{lang === "CN"
-								? "正在计算中....."
-								: "Calculations in progress....."}
-						</Text>
+					<Box className="p-5 bg-[#fff] rounded-[6px] overflow-auto">
+						<HStack spacing={1}>
+							<Text>
+								{lang === "CN" ? "正在计算中" : "Calculations in progress"}
+							</Text>
+							<BeatLoader color="#000" size={4} speedMultiplier={1}/>
+						</HStack>
+
 						<Skeleton
 							height="10px"
-							my={1}
+							mt={2}
 							w={"400px"}
 							startColor="#F3F3F3"
 							endColor="#DFDFDF"
 							borderRadius={"8px"}
 						/>
-					</div>
+					</Box>
 				</Flex>
 			)}
 		</VStack>
