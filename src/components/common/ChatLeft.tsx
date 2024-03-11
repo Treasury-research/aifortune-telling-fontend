@@ -46,11 +46,12 @@ export default function ChatLeft(props: any) {
 					color="#7A61DE"
 				>
 					{item.recommends.length > 0 &&
-						item.recommends.map((item: string) => {
+						item.recommends.map((item: string,index:number) => {
 							return (
 								<HStack
 									px={3}
 									py="6px"
+									key={index}
 									bg="rgba(122, 97, 222, 0.2)"
 									borderRadius="md"
 									cursor="pointer"
