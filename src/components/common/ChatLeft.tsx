@@ -40,6 +40,8 @@ export default function ChatLeft(props: any) {
 				<VStack
 					alignItems="flex-start"
 					ml="68px"
+					mb={5}
+					className="max-w-[calc(100vw-900px)]"
 					fontSize="14px"
 					color="#7A61DE"
 				>

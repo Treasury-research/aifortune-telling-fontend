@@ -74,7 +74,7 @@ export default function ChatRight(props: any) {
 				)}
 				<Avatar size="md" bg="rgba(160,60,214)" />
 			</div>
-			{true && (
+			{showContent && (
 				<Flex w="full" className="flex gap-5 items-start ">
 					<Image
 						className="shrink-0 h-[48px] rounded-[50%]"
@@ -86,7 +86,7 @@ export default function ChatRight(props: any) {
 							<Text fontSize="14px">
 								{lang === "CN" ? "正在计算中" : "Calculations in progress"}
 							</Text>
-							<BeatLoader color="#000" size={4} speedMultiplier={1}/>
+							<BeatLoader color="#000" size={4} speedMultiplier={1} />
 						</HStack>
 
 						<Skeleton
