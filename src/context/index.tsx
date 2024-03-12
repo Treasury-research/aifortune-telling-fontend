@@ -128,13 +128,18 @@ export default function ChatProvider({ children }: any) {
 		} else {
 			handleAsset(type, paload, id);
 		}
-		handleRecommdend(paload, id);
+		handleRecommdend(type, paload, id);
 	};
 
-	const handleRecommdend = async (paload: any, id: string) => {
+	const handleRecommdend = async (
+		type: "chat" | "form" | "jqpp",
+		paload: any,
+		id: string
+	) => {
 		const res: any = await api.post(`${baseURL}/api/question_rec`, {
 			conversation_id: activeChat.id,
 			...paload,
+			matcher_type: section == "numerology" ? 2 : type === "form" ? 1 : 0,
 		});
 
 		console.log(res);
