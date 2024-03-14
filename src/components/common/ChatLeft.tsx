@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Image, Text, Box, Flex, VStack, HStack } from "@chakra-ui/react";
+import { Image, Text, Box, Flex, VStack, HStack, Icon } from "@chakra-ui/react";
 import { Router, useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
 import { Markdown } from "./MarkDown";
@@ -55,6 +55,7 @@ export default function ChatLeft(props: any) {
 									bg="rgba(122, 97, 222, 0.2)"
 									borderRadius="md"
 									cursor="pointer"
+									alignItems="flex-start"
 									onClick={() => {
 										addMessage(activeChatId, [
 											{
@@ -69,7 +70,7 @@ export default function ChatLeft(props: any) {
 										});
 									}}
 								>
-									<SearchIcon />
+									<Icon as={SearchIcon} mt={1}/>
 									<Text>{item}</Text>
 								</HStack>
 							);

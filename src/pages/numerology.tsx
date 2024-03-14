@@ -104,19 +104,7 @@ export default function Numerology() {
 	return (
 		<>
 			<div className="w-full h-full flex">
-				<div className="w-[120px] h-full bg-[#E4DFF8]">
-					<div
-						className="w-[50px] mx-auto mt-5 mb-10 h-[50px]"
-						onClick={() => router.push("/home")}
-					>
-						<Image
-							className="shrink-0 cursor-pointer"
-							src={`/images/logo.png`}
-							alt=""
-						/>
-					</div>
-					<Left />
-				</div>
+				<Left tabName="numerology" />
 				<div className="w-[300px] h-full px-5 py-10 overflow-auto no-scrollbar">
 					<div className="text-[20px] font-bold mb-10">
 						{lang === "CN" ? "命理占卜" : "Five Elements"}

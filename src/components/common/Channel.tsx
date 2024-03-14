@@ -51,14 +51,14 @@ export default function Channel(props: any) {
     } = useChatContext();
 
     const {
-        name,
-        birthDay,
-        setName,
-        setBirthDay,
-        userConverId,
-        setUserConverId,
-        user_id
-    } = userInfoStore();
+			name,
+			birthDay,
+			setName,
+			setBirthDay,
+			userConverId,
+			setUserConverId,
+			userId,
+		} = userInfoStore();
 
     return (
         <div className='w-full'>

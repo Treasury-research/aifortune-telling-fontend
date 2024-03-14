@@ -40,8 +40,9 @@ export default function ChatProvider({ children }: any) {
 		setName,
 		setSex,
 		setBirthDay,
+		account,
 		userConverId,
-		user_id,
+		userId,
 		setUserId,
 		setAssets,
 	} = userInfoStore();
@@ -94,7 +95,7 @@ export default function ChatProvider({ children }: any) {
 
 	const getAssets = async () => {
 		const res: any = await api.post(`/api/assets_select`, {
-			user_id,
+			userId,
 		});
 		if (res && res.length > 0 && res[0].data && res[0].data.length > 0) {
 			setAssets(res[0].data);
@@ -214,9 +215,10 @@ export default function ChatProvider({ children }: any) {
 			url = "/api/baziMatch";
 			params = {
 				...paload,
-				user_id,
+				userId,
 				conversation_id: activeChat.id,
 				matcher_type: 2,
+				account: account || null,
 				day: paload.day ? Number(paload.day).toString() : "",
 				month: paload.month ? Number(paload.month).toString() : "",
 			};
@@ -235,7 +237,7 @@ export default function ChatProvider({ children }: any) {
 		}
 		setIsDone(false);
 		// const res: any = await api.post(url, {
-		// 	user_id,
+		// 	userId,
 		// });
 		await fetch(`${baseURL}${url}`, {
 			method: "POST",
@@ -331,11 +333,12 @@ export default function ChatProvider({ children }: any) {
 		let source: any;
 		if (type == "form") {
 			// 已经填入个人信息，走八字匹配接口
-			if (userConverId && user_id) {
+			if (userConverId && userId) {
 				url = "/api/baziMatch";
 				params = {
 					...paload,
-					user_id,
+					userId,
+					account: account || null,
 					name: activeChat.messages[1].name,
 					conversation_id: activeChat.id,
 					matcher_type: 1,

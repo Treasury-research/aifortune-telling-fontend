@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const baseURL = process.env.NEXT_PUBLIC_DOMAIN;
 
+import { userInfoStore } from "store/userInfoStore";
+
 const api = axios.create({
 	baseURL,
 	retry: 1,
@@ -9,7 +11,9 @@ const api = axios.create({
 
 api.interceptors.request.use(
 	(config) => {
+		const token = userInfoStore.getState().token;
 		config.headers.Lang = navigator.language.startsWith("en") ? "En" : "Cn";
+		config.headers.authorization = token || undefined;
 		return config;
 	},
 	(err) => {

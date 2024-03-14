@@ -36,14 +36,14 @@ export default function AssetForm(props: any) {
     } = useChatContext();
 
     const {
-        name,
-        birthDay,
-        setName,
-        setBirthDay,
-        userConverId,
-        setUserConverId,
-        user_id
-    } = userInfoStore();
+			name,
+			birthDay,
+			setName,
+			setBirthDay,
+			userConverId,
+			setUserConverId,
+			userId,
+		} = userInfoStore();
 
     const [selectedTimezone, setSelectedTimezone] = useState<ITimezone>(
         Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -63,12 +63,12 @@ export default function AssetForm(props: any) {
         let cnTime = getCnDate(item.utc, item.birthDay, item.time)
         let time = getTimeRange(cnTime[1])
         const res: any = await api.post(`${baseURL}/api/assets_insert`, {
-            user_id,
-            name: item.name,
-            birthday: item.birthDay,
-            is_public: false,
-            n: true,
-        });
+					userId,
+					name: item.name,
+					birthday: item.birthDay,
+					is_public: false,
+					n: true,
+				});
         updateChat(activeChatId, { name: item.name })
         if (res && res.length > 0 && res[0]['status'] == "success") {
             getAssets()
