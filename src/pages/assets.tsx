@@ -6,23 +6,13 @@ import ChatInput from "components/common/ChatInput";
 import ChatLeft from "components/common/ChatLeft";
 import ChatRight from "components/common/ChatRight";
 import { Router, useRouter } from "next/router";
-import {
-	Image,
-	Input,
-	Radio,
-	RadioGroup,
-	Stack,
-	Button,
-	Icon,
-} from "@chakra-ui/react";
+import { Text, Button, Image, Box, Flex, HStack } from "@chakra-ui/react";
 import useChatContext from "hooks/useChatContext";
 import { v4 as uuidv4 } from "uuid";
 import { userInfoStore } from "store/userInfoStore";
 import { useToast } from "@chakra-ui/react";
 import api, { baseURL } from "api";
-import { IoMdAdd } from "react-icons/io";
-import moment from "moment";
-import { getTimeRangeFw } from "lib/common";
+import { useChatStore } from "store/chatStore";
 
 export default function Assets() {
 	const {
@@ -43,6 +33,9 @@ export default function Assets() {
 	const { name, userId, assets } = userInfoStore();
 	const router = useRouter();
 	const toast = useToast();
+	const { clearChatInfo, lang } = useChatStore();
+
+	console.log("assets", assets);
 
 	const resetConvertion = async () => {
 		const res: any = await api.post(`${baseURL}/api/reset_chat`, {
@@ -65,46 +58,42 @@ export default function Assets() {
 			timestamp: timestamp,
 			section,
 			messages: [],
-			name: `# 资产运势 ${time}`,
+			name: `${lang === "CN" ? "资产运势" : "New Five Elements"} ${time}`,
 		};
 
 		addChat(newChat);
 		router.push(`/${section}?id=${newChat.id}`);
 	};
 
-	const addAssets = () => {
-		updateChat(activeChatId, {
-			messages: [
-				{
-					id: uuidv4(),
-					content: "请填写币种信息，以便占卜师为您预测运势~",
-					type: "answer",
-					loading: false,
-				},
-				{
-					id: uuidv4(),
-					type: "question",
-					isSubmit: false,
-					category: "form",
-					name: "",
-					birthDay: "",
-					is_public: "1",
-					time: "01:00~02:59",
-					utc: "UTC+08:00",
-				},
-			],
-		});
-	};
+	// const addAssets = () => {
+	// 	updateChat(activeChatId, {
+	// 		messages: [
+	// 			{
+	// 				id: uuidv4(),
+	// 				content: "请填写币种信息，以便占卜师为您预测运势~",
+	// 				type: "answer",
+	// 				loading: false,
+	// 			},
+	// 			{
+	// 				id: uuidv4(),
+	// 				type: "question",
+	// 				isSubmit: false,
+	// 				category: "form",
+	// 				name: "",
+	// 				birthDay: "",
+	// 				is_public: "1",
+	// 				time: "01:00~02:59",
+	// 				utc: "UTC+08:00",
+	// 			},
+	// 		],
+	// 	});
+	// };
 
 	const assetsBtnClick = (t: any) => {
-		const parsedDate = moment(t[1]).format("YYYY/MM/DD HH");
 		submitQuestion("form", {
-			year: parsedDate.split("/")[0],
-			month: parsedDate.split("/")[1],
-			day: parsedDate.split("/")[2].split(" ")[0],
-			time: getTimeRangeFw(parsedDate.split("/")[2].split(" ")[1]),
 			name: t[0],
 			n: true,
+			matcher_id: t[2],
 		});
 	};
 
@@ -126,7 +115,9 @@ export default function Assets() {
 			<div className="w-full h-full flex">
 				<Left tabName="assets" />
 				<div className="w-[300px] h-full px-5 py-10 overflow-auto no-scrollbar">
-					<div className="text-[20px] font-bold mb-10">资产运势</div>
+					<div className="text-[20px] font-bold mb-10">
+						{lang === "CN" ? "资产运势" : "Token Five Elements"}
+					</div>
 					<Channel resetConvertion={() => resetConvertion()} />
 					<div
 						className="w-full h-10 cursor-pointer px-5"
@@ -145,14 +136,15 @@ export default function Assets() {
 							createNewChat();
 						}}
 					>
-						<span className="text-[20px] font-bold">+</span> 新的占卜
+						<span className="text-[20px] font-bold">+</span>
+						{lang === "CN" ? " 新的占卜" : " New Five Elements "}
 					</div>
 				</div>
 
-				<div className="w-[calc(100%-280px)] h-full pr-5">
-					<div className="h-20 flex items-center text-[18px] font-bold">
+				<Box className="w-[calc(100%-280px)] h-full pr-5">
+					<Text className="h-20 flex items-center text-[18px] font-bold">
 						{activeChat ? activeChat.name : ""}
-					</div>
+					</Text>
 					<div className="w-full h-[calc(100%-80px)] bg-[#F3F4F6] rounded-[10px] pt-10 px-10">
 						<div
 							className={`${
@@ -176,26 +168,57 @@ export default function Assets() {
 									))}
 								</>
 							) : (
-								<div className="w-full h-full items-center justify-center flex">
+								<Box className="w-full h-full items-center justify-center flex">
 									<div className="w-[80%]">
-										<div className="mb-10 font-bold text-[16px] text-center">
-											请选择下列币种，占卜您与该币种的关系
+										<div className="mb-10 font-bold text-[18px] text-center">
+											{lang === "CN"
+												? "请选择下列币种，占卜该币种的运势"
+												: "Please select the following coins to read the horoscope of that coin"}
 										</div>
-										<div className="overflow-auto w-full max-h-[50vh]">
-											{assets.map((t: any, i: number) => (
-												<div
+										<Flex className="overflow-auto w-full max-h-[50vh]">
+											{(assets["hot"] || []).map((t: any, i: number) => (
+												<HStack
 													key={i}
-													className="truncate w-[120px] flex items-center justify-center 
+													borderRadius={4}
+													px={4}
+													fontWeight="semibold"
+													className="truncate flex items-center justify-center 
                             mb-3 float-left mr-3 mx-4 h-10 border-[1px] 
                             border-[#D8D8D8] bg-[#fff] hover:opacity-70 
                             rounded-[2px] cursor-pointer text-center"
 													onClick={() => assetsBtnClick(t)}
 												>
-													{t[0]}
-												</div>
+													<Image
+														src={`/images/coins/${t[0]}.svg`}
+														boxSize={5}
+														alt=""
+													/>
+													<Text>{t[0]}</Text>
+												</HStack>
 											))}
-										</div>
-										<div className="flex justify-center mt-10">
+										</Flex>
+
+										<Box mt={2} className="overflow-auto w-full max-h-[50vh]">
+											<Text my={3} ml={4} fontWeight="semibold">
+												{lang === "CN" ? "近期热点Token" : "Trending Token"}
+											</Text>
+											{(assets["recent_hot"] || []).map((t: any, i: number) => (
+												<Box
+													key={i}
+													px={3}
+													borderRadius={4}
+													className="truncate flex items-center justify-center 
+                            mb-3 float-left mr-3 mx-4 h-8 border-[1px] 
+                            border-[#D8D8D8] bg-[#fff] hover:opacity-70 
+                            rounded-[2px] cursor-pointer text-center"
+													onClick={() => assetsBtnClick(t)}
+												>
+													{t[0]}
+												</Box>
+											))}
+										</Box>
+
+										{/* <div className="flex justify-center mt-10">
 											<Button
 												variant="bluePrimary"
 												size="md"
@@ -207,9 +230,9 @@ export default function Assets() {
 												<Icon as={IoMdAdd} color="bg.white" boxSize={5} />
 												添加资产
 											</Button>
-										</div>
+										</div> */}
 									</div>
-								</div>
+								</Box>
 							)}
 						</div>
 						{activeChat &&
@@ -234,7 +257,7 @@ export default function Assets() {
 								</div>
 							)}
 					</div>
-				</div>
+				</Box>
 			</div>
 		</>
 	);

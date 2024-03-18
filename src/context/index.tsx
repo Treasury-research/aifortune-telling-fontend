@@ -95,9 +95,9 @@ export default function ChatProvider({ children }: any) {
 
 	const getAssets = async () => {
 		const res: any = await api.post(`/api/assets_select`, {
-			userId,
+			user_id: userId,
 		});
-		if (res && res.length > 0 && res[0].data && res[0].data.length > 0) {
+		if (res && res.length > 0 && res[0].data) {
 			setAssets(res[0].data);
 		}
 	};
@@ -140,7 +140,8 @@ export default function ChatProvider({ children }: any) {
 		const res: any = await api.post(`${baseURL}/api/question_rec`, {
 			conversation_id: activeChat.id,
 			...paload,
-			matcher_type: section == "numerology" ? 2 : type === "form" ? 1 : 0,
+			user_id: userId,
+			matcher_type: section == "assets" ? 2 : type === "form" ? 1 : 0,
 		});
 
 		console.log(res);
@@ -215,12 +216,10 @@ export default function ChatProvider({ children }: any) {
 			url = "/api/baziMatch";
 			params = {
 				...paload,
-				userId,
+				user_id: userId,
 				conversation_id: activeChat.id,
 				matcher_type: 2,
 				account: account || null,
-				day: paload.day ? Number(paload.day).toString() : "",
-				month: paload.month ? Number(paload.month).toString() : "",
 			};
 		} else if (type == "chat") {
 			url = "/api/chat_bazi_match";
@@ -264,8 +263,12 @@ export default function ChatProvider({ children }: any) {
 	) => {
 		// const id = uuidv4();
 		const onChunkedResponseError = (err: any) => {
-			console.error(err);
+			// console.error(err);
 			setIsDone(true);
+			updateMessage(activeChatId, id, {
+				content: "Message error",
+				loading: false,
+			});
 		};
 
 		const processChunkedResponse = (response: any) => {
@@ -333,11 +336,11 @@ export default function ChatProvider({ children }: any) {
 		let source: any;
 		if (type == "form") {
 			// 已经填入个人信息，走八字匹配接口
-			if (userConverId && userId) {
+			if (userConverId) {
 				url = "/api/baziMatch";
 				params = {
 					...paload,
-					userId,
+					user_id: userId,
 					account: account || null,
 					name: activeChat.messages[1].name,
 					conversation_id: activeChat.id,
@@ -349,6 +352,8 @@ export default function ChatProvider({ children }: any) {
 				url = "/api/baziAnalysis";
 				params = {
 					...paload,
+					user_id: userId,
+					account: account || null,
 					name: activeChat.messages[1].name,
 					conversation_id: activeChat.id,
 					day: paload.day ? Number(paload.day).toString() : "",

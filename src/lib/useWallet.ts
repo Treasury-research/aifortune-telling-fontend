@@ -52,7 +52,7 @@ export default function useWallet() {
 	const { open } = useWeb3Modal();
 	const { clearConnectModalStore, setOpenConnectModal, openConnectModal } =
 		useConnectModalStore();
-	const { setUserId, clearUserInfo, setAccount, setEmail, setToken } =
+	const { setUserId, clearUserInfo, setAccount, setEmail, setToken, setName } =
 		userInfoStore();
 
 	console.log("isConnected:", isConnected, address);
@@ -108,6 +108,7 @@ export default function useWallet() {
 			setUserId(res[0]?.data?.user_id);
 			setEmail(res[0]?.data?.email);
 			setToken(res[0]?.data?.token);
+			setName(res[0]?.data?.name);
 		} else {
 			setIsLogin.off();
 			toast({
@@ -162,6 +163,7 @@ export default function useWallet() {
 			setAccount(res[0]?.data?.account);
 			setUserId(res[0]?.data?.user_id);
 			setEmail(res[0]?.data?.email);
+			setName(res[0]?.data?.name);
 		}
 	};
 

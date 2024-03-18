@@ -19,11 +19,11 @@ export default function Left({ tabName }: { tabName: string }) {
 			img: "ml",
 			router: "numerology",
 		},
-		// {
-		//     name: '资产',
-		//     img: 'zc',
-		//     router: 'assets'
-		// }
+		{
+			name: lang === "CN" ? "资产" : "Assets",
+			img: "zc",
+			router: "assets",
+		},
 	];
 
 	return (

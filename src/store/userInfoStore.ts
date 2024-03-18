@@ -13,7 +13,7 @@ export const userInfoStore: any = create<any>()(
 			birthDay: "",
 			userId: "",
 			userConverId: "",
-			assets: [],
+			assets: {},
 			setAccount: (account: string) => {
 				set({ account });
 			},
@@ -53,17 +53,25 @@ export const userInfoStore: any = create<any>()(
 					birthDay,
 				});
 			},
+			resetChat: () => {
+				set({
+					name: "",
+					sex: false, //false 男 true女
+					birthDay: "",
+					userConverId: "",
+				});
+			},
 			clearUserInfo: () => {
 				set({
 					account: "",
 					email: "",
-					name: "",
+					// name: "",
 					sex: false, //false 男 true女
 					birthDay: "",
 					userId: "",
 					token: "",
 					userConverId: "",
-					assets: [],
+					assets: {},
 				});
 			},
 		}),

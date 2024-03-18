@@ -2,13 +2,14 @@ import { createWeb3Modal } from "@web3modal/wagmi/react";
 import { defaultWagmiConfig } from "@web3modal/wagmi/react/config";
 import { WagmiProvider } from "wagmi";
 import { arbitrum, mainnet } from "wagmi/chains";
+import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 // 0. Setup queryClient
 const queryClient = new QueryClient();
 
 // 1. Get projectId at https://cloud.walletconnect.com
-const projectId = "c27e0568aa579f4d572246b7a2882010";
+const projectId = "7357e2defc3d574ff101a3b9634e2b60";
 
 // 2. Create wagmiConfig
 const metadata = {
@@ -21,8 +22,11 @@ const metadata = {
 const chains = [mainnet] as const;
 const config = defaultWagmiConfig({
 	chains,
+	ssr: true,
+	pollingInterval: 10_0000,
 	projectId,
 	metadata,
+	// enableInjected: false,
 	// enableEIP6963: false,
 	enableCoinbase: false,
 	enableSmartAccounts: false,
@@ -34,10 +38,15 @@ createWeb3Modal({
 	wagmiConfig: config,
 	projectId,
 	enableAnalytics: false, // Optional - defaults to your Cloud configuration
-	enableOnramp: true, // Optional - false as default
+	enableOnramp: false, // Optional - false as default
 });
 
 export function Web3ModalProvider({ children }: { children: any }) {
+	const [ready, setReady] = useState(false);
+
+	useEffect(() => {
+		setReady(true);
+	}, []);
 	return (
 		<WagmiProvider config={config}>
 			<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

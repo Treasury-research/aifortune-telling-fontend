@@ -20,6 +20,7 @@ import { toShortAddress } from "lib/common";
 import { Copy } from "components/Copy";
 import { userInfoStore } from "store/userInfoStore";
 import { LuLogOut } from "react-icons/lu";
+import { useChatStore } from "store/chatStore";
 // import WalletIcon from '@icon/WalletIcon';
 
 interface Web3LoginModalProps {
@@ -30,13 +31,14 @@ export const ConnectBtn = (props: any) => {
 	const { setOpenConnectModal } = useConnectModalStore();
 	const { isConnected, address, getAuth, doLogout } = useWallet();
 	const { userId } = userInfoStore();
-	console.log("userId", userId);
+	const { lang } = useChatStore();
+	// console.log("userId", userId);
 
 	useEffect(() => {
 		if (userId && address) {
 			getAuth();
 		}
-	}, []);
+	}, [userId, address]);
 
 	return (
 		<Box mb="5!">
@@ -60,7 +62,7 @@ export const ConnectBtn = (props: any) => {
 							</MenuItem>
 							<MenuItem onClick={doLogout}>
 								<HStack>
-									<Text>Logout</Text>
+									<Text>{lang === "CN" ? "登出" : "Logout"}</Text>
 									<Icon as={LuLogOut} boxSize={4} color="#7B62DE" />
 								</HStack>
 							</MenuItem>

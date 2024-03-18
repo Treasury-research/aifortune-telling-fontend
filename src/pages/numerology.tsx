@@ -38,7 +38,7 @@ export default function Numerology() {
 		submitQuestion,
 		addMessage,
 	} = useChatContext();
-	const { name, userConverId, clearUserInfo } = userInfoStore();
+	const { name, userConverId, resetChat } = userInfoStore();
 	const { clearChatInfo, lang } = useChatStore();
 	const router = useRouter();
 	const toast = useToast();
@@ -46,7 +46,10 @@ export default function Numerology() {
 	const resetConver = [
 		{
 			id: uuidv4(),
-			content: lang === "CN" ? "请填写以下个人信息，以便占卜师为您预测运势~" : "Please fill in the following personal information~",
+			content:
+				lang === "CN"
+					? "请填写以下个人信息，以便占卜师为您预测运势~"
+					: "Please fill in the following personal information~",
 			type: "answer",
 			loading: false,
 		},
@@ -65,7 +68,7 @@ export default function Numerology() {
 
 	const resetConvertion = async () => {
 		if (activeChatId == userConverId) {
-			clearUserInfo();
+			resetChat();
 			clearChatInfo();
 		}
 		const res: any = await api.post(`${baseURL}/api/reset_chat`, {
