@@ -148,7 +148,7 @@ export default function Numerology() {
 								<>
 									{activeChat.messages.map((t: any, i: number) => (
 										<div key={i}>
-											{t.type == "answer" && t.content && <ChatLeft item={t} />}
+											{t.type == "answer" && <ChatLeft item={t} />}
 											{t.type == "question" && <ChatRight item={t} index={i} />}
 										</div>
 									))}

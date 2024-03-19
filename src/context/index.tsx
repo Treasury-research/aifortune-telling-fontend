@@ -10,6 +10,7 @@ export const ChatContext = createContext({});
 
 export default function ChatProvider({ children }: any) {
 	const router = useRouter();
+	const { lang } = useChatStore();
 
 	const {
 		setTotalCoupon,
@@ -163,8 +164,9 @@ export default function ChatProvider({ children }: any) {
 		const onChunkedResponseError = (err: any) => {
 			setIsDone(true);
 			updateMessage(activeChatId, id, {
-				content: "Message error",
+				content: lang === "CN" ? "消息请求失败!" : "Message error",
 				loading: false,
+				error: true
 			});
 		};
 
@@ -189,13 +191,10 @@ export default function ChatProvider({ children }: any) {
 
 					sourceChunk += chunk;
 
-					addMessage(activeChatId, [
+					updateMessage(activeChatId, id, [
 						{
-							id,
 							content: sourceChunk,
-							type: "answer",
 							loading: false,
-							source: type,
 						},
 					]);
 
@@ -234,10 +233,18 @@ export default function ChatProvider({ children }: any) {
 				conversation_id: activeChat.id,
 			};
 		}
+		addMessage(activeChatId, [
+			{
+				id,
+				content: "",
+				type: "answer",
+				loading: true,
+				source: type,
+			},
+		]);
+		onScroll(400);
+
 		setIsDone(false);
-		// const res: any = await api.post(url, {
-		// 	userId,
-		// });
 		await fetch(`${baseURL}${url}`, {
 			method: "POST",
 			headers: {
@@ -266,8 +273,9 @@ export default function ChatProvider({ children }: any) {
 			// console.error(err);
 			setIsDone(true);
 			updateMessage(activeChatId, id, {
-				content: "Message error",
+				content: lang === "CN" ? "消息请求失败!" : "Message error",
 				loading: false,
+				error: true,
 			});
 		};
 
@@ -396,7 +404,7 @@ export default function ChatProvider({ children }: any) {
 		await fetch(`${baseURL}${url}`, {
 			method: "POST",
 			headers: {
-				Lang: navigator.language.startsWith("en") ? "En" : "Cn",
+				Lang: lang === "CN" ? "Cn" : "En",
 				"Content-Type": "application/json",
 			},
 			body: JSON.stringify({
