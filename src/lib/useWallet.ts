@@ -5,6 +5,7 @@ import { mainnet, sepolia } from "wagmi/chains";
 // import { signMessage } from "@wagmi/core";
 import { useAccount, useDisconnect, useSignMessage } from "wagmi";
 import { createWeb3Modal } from "@web3modal/wagmi/react";
+import { useChatStore } from "store/chatStore";
 
 import { useRouter } from "next/router";
 import { useConnectModalStore } from "store/modalStore";
@@ -48,6 +49,7 @@ export default function useWallet() {
 	const [signLoading, setSignLoading] = useState(false);
 	const { address, isConnected, isDisconnected } = useAccount();
 	const { disconnect } = useDisconnect();
+	const { lang } = useChatStore();
 
 	const { open } = useWeb3Modal();
 	const { clearConnectModalStore, setOpenConnectModal, openConnectModal } =
@@ -112,7 +114,7 @@ export default function useWallet() {
 		} else {
 			setIsLogin.off();
 			toast({
-				description: "Authentication failed!",
+				description: lang === "CN" ? "认证失败" : "Authentication failed!",
 				duration: 3000,
 				position: "top-right",
 				variant: "subtle",
@@ -129,7 +131,7 @@ export default function useWallet() {
 			console.log("res", res);
 			if (res) {
 				toast({
-					description: "Login Success!",
+					description: lang === "CN" ? "登陆成功!" : "Login Success!",
 					duration: 3000,
 					position: "top-right",
 					variant: "subtle",
@@ -138,7 +140,7 @@ export default function useWallet() {
 				});
 			} else {
 				toast({
-					description: "Login Failed!",
+					description: lang === "CN" ? "登陆失败!" : "Login Failed!",
 					duration: 3000,
 					position: "top-right",
 					variant: "subtle",
