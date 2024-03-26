@@ -186,6 +186,9 @@ export default function useWallet() {
 		if (isConnected && isLogin) {
 			handleLogin();
 		}
+		if (!isConnected) {
+			doLogout();
+		}
 	}, [isConnected]);
 
 	return {

@@ -5,7 +5,6 @@ import { arbitrum, mainnet } from "wagmi/chains";
 import { useEffect, useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
-// 0. Setup queryClient
 const queryClient = new QueryClient();
 
 // 1. Get projectId at https://cloud.walletconnect.com
