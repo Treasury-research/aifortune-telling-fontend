@@ -108,7 +108,6 @@ export default function Numerology() {
 				/^(https?:\/\/[^\/]+)(\/.*)$/,
 				"$1/mobile$2"
 			);
-
 			router.push(mobileURL);
 		}
 	}, [router]);
