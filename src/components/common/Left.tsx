@@ -6,6 +6,7 @@ import { useToast } from "@chakra-ui/react";
 import { useChatStore } from "store/chatStore";
 import { ConnectBtn } from "components/connect/ConnectBtn";
 import { ConnectModal } from "components/connect/ConnectModal";
+import { isPhone } from "lib/common";
 
 export default function Left({ tabName }: { tabName: string }) {
 	const router = useRouter();
@@ -28,7 +29,7 @@ export default function Left({ tabName }: { tabName: string }) {
 
 	return (
 		<>
-			<VStack w="120px" justify="space-between" h="full" bg="#E4DFF8">
+			<VStack w="auto" justify="space-between" h="full" bg="#E4DFF8">
 				<Box>
 					<Image
 						className="shrink-0 cursor-pointer"
@@ -55,7 +56,7 @@ export default function Left({ tabName }: { tabName: string }) {
 											status: "info",
 											isClosable: false,
 										});
-										router.push(`/numerology`);
+										router.push(isPhone() ? `mobile/numerology` : `/numerology`);
 										return;
 									}
 									const chatList: any = getAllChatList()

@@ -21,7 +21,6 @@ import { userInfoStore } from "store/userInfoStore";
 import { useChatStore } from "store/chatStore";
 import { useToast } from "@chakra-ui/react";
 import api, { baseURL } from "api";
-import { getCnDate } from "lib/common";
 
 export default function Numerology() {
 	const {
@@ -33,7 +32,7 @@ export default function Numerology() {
 		allChatList,
 		updateChat,
 		section,
-		isGenerate,
+		isPhone,
 		addChat,
 		submitQuestion,
 		addMessage,
@@ -103,6 +102,17 @@ export default function Numerology() {
 			createNewChat();
 		}
 	}, [allChatList]);
+
+	useEffect(() => {
+		if (isPhone) {
+			const mobileURL = location.href.replace(
+				/^(https?:\/\/[^\/]+)(\/.*)$/,
+				"$1/mobile$2"
+			);
+
+			router.push(mobileURL);
+		}
+	}, [router]);
 
 	return (
 		<>

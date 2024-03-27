@@ -24,7 +24,7 @@ export default function Assets() {
 		allChatList,
 		updateChat,
 		section,
-		isGenerate,
+		isPhone,
 		addChat,
 		submitQuestion,
 		addMessage,
@@ -105,10 +105,21 @@ export default function Assets() {
 
 	useEffect(() => {
 		getAssets();
-		if (!name) {
-			router.push(`/numerology`);
-		}
+		// if (!name) {
+		// 	router.push(`/numerology`);
+		// }
 	}, []);
+
+	useEffect(() => {
+		if (isPhone) {
+			const mobileURL = location.href.replace(
+				/^(https?:\/\/[^\/]+)(\/.*)$/,
+				"$1/mobile$2"
+			);
+
+			router.push(mobileURL);
+		}
+	}, [router]);
 
 	return (
 		<>

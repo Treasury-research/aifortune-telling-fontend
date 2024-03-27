@@ -78,3 +78,27 @@ export const getCnDate = (typeUtc: string, date: string, timeRange: string) => {
     return [formattedDate, `${formattedRange.join('~')}`]
 };
 
+export const isPhone = () => {
+	let flag =
+		/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+			window.navigator?.userAgent
+		);
+	const ua: any = window.navigator.userAgent.toLowerCase();
+	if (ua.match(/MicroMessenger/i) == "micromessenger") {
+		flag = true;
+	}
+
+	return flag;
+};
+
+
+export function getSection() {
+	if (location.href.includes("numerology")) {
+		return "numerology";
+	} else if (location.href.includes("assets")) {
+		return "assets";
+	} else {
+		return null;
+	}
+}
+

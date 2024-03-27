@@ -11,7 +11,9 @@ import locale from "antd/locale/zh_CN";
 import { Web3ModalProvider } from "context/Web3ModalProvider";
 
 import dayjs from "dayjs";
+
 import "dayjs/locale/zh-cn";
+import "styles/h5.css";
 
 import "styles/globals.css";
 import "styles/markdown.css";
@@ -39,6 +41,8 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 		console.log("lang:", lang);
 		setLang(lang);
 	}, []);
+
+	
 
 	return (
 		<Web3ModalProvider>

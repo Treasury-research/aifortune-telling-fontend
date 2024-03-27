@@ -5,6 +5,7 @@ import api, { baseURL } from "api";
 import { useRouter } from "next/router";
 import { useChatStore } from "store/chatStore";
 import { userInfoStore } from "store/userInfoStore";
+import { getSection, isPhone as isMobile } from "lib/common";
 
 export const ChatContext = createContext({});
 
@@ -48,10 +49,12 @@ export default function ChatProvider({ children }: any) {
 		setAssets,
 	} = userInfoStore();
 
-	const [section, setSection] = useState(router.pathname.split("/")[1]);
+	const [section, setSection] = useState<string | null>();
 	const { onOpen, onClose, isOpen } = useDisclosure();
 	const [input, setInput] = useState("");
 	const [isDone, setIsDone] = useState(true);
+	const [showNav, setShowNav] = useBoolean(false);
+	const [isPhone, setIsPhone] = useBoolean(false);
 
 	let activeChat: any = getActiveChat();
 	const activeMessages: any = getActiveChatMessages();
@@ -75,7 +78,8 @@ export default function ChatProvider({ children }: any) {
 			}
 		}
 		if (router.pathname) {
-			setSection(router.pathname.split("/")[1]);
+			const sec = getSection()
+			setSection(sec);
 		}
 		onScroll(600);
 	}, [router]);
@@ -93,6 +97,19 @@ export default function ChatProvider({ children }: any) {
 
 		setAllChatList(chatList);
 	}, [section, chatById, activeChatId]);
+
+	useEffect(() => {
+		const isphone = isMobile();
+		isphone ? setIsPhone.on() : setIsPhone.off();
+	}, [router]);
+
+	const openNav = async () => {
+		setShowNav.on();
+	};
+
+	const closeNav = async () => {
+		setShowNav.off();
+	};
 
 	const getAssets = async () => {
 		const res: any = await api.post(`/api/assets_select`, {
@@ -166,7 +183,7 @@ export default function ChatProvider({ children }: any) {
 			updateMessage(activeChatId, id, {
 				content: lang === "CN" ? "消息请求失败!" : "Message error",
 				loading: false,
-				error: true
+				error: true,
 			});
 		};
 
@@ -423,11 +440,9 @@ export default function ChatProvider({ children }: any) {
 	return (
 		<ChatContext.Provider
 			value={{
-				onOpen,
-				onClose,
 				isOpen,
-				setInput,
 				input,
+				isPhone,
 				activeChatId,
 				activeChat,
 				activeMessages,
@@ -436,17 +451,24 @@ export default function ChatProvider({ children }: any) {
 				allChatList,
 				getChatList,
 				section,
-				setSection,
 				getChat,
 				addChat,
 				removeChat,
 				updateChat,
 				updateMessage,
-				submitQuestion,
-				addMessage,
-				getAssets,
-				setIsDone,
 				isDone,
+				addMessage,
+				showNav,
+				setShowNav,
+				openNav,
+				onOpen,
+				closeNav,
+				setInput,
+				onClose,
+				getAssets,
+				submitQuestion,
+				setSection,
+				setIsDone,
 			}}
 		>
 			{children}
