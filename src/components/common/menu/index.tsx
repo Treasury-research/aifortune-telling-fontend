@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 
 export function Menu({ tabName }: { tabName: string }) {
 	const {
-		setActiveChatId,
+		setActiveChatById,
 		activeChatId,
 		removeChat,
 		activeChat,
@@ -78,13 +78,17 @@ export function Menu({ tabName }: { tabName: string }) {
 			timestamp: timestamp,
 			section,
 			messages: [...resetConver],
-			name: `${lang === "CN" ? "新的占卜" : "New Five Elements"} ${time}`,
+			name: `${
+				lang === "CN"
+					? section === "numerology"
+						? "新的占卜"
+						: "资产运势"
+					: "New Five Elements"
+			} ${time}`,
 		};
 
 		addChat(newChat);
-		setActiveChatId(newChatId);
-		const newURL = location.href.replace(/(\?|&)id=[^&]*/, "$1id=" + newChatId);
-		history.replaceState({}, document.title, newURL);
+		setActiveChatById(newChatId);
 	};
 
 	return (
@@ -95,26 +99,15 @@ export function Menu({ tabName }: { tabName: string }) {
 					{lang === "CN" ? "命理占卜" : "Five Elements"}
 				</div>
 				<Channel resetConvertion={() => resetConvertion()} />
-				<div
+				<Box
 					className="w-full h-10 cursor-pointer pr-5 pl-2"
 					onClick={() => {
-						if (!name && section==="assets") {
-							toast({
-								description: "请先提交您的个人信息!",
-								duration: 3000,
-								position: "top-right",
-								variant: "subtle",
-								status: "info",
-								isClosable: false,
-							});
-							return;
-						}
 						createNewChat();
 					}}
 				>
 					<span className="text-[20px] font-bold">+</span>
 					{lang === "CN" ? " 新的占卜" : " New Five Elements "}
-				</div>
+				</Box>
 			</div>
 		</HStack>
 	);

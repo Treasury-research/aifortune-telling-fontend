@@ -71,14 +71,13 @@ export default function ChatProvider({ children }: any) {
 	const [allChatList, setAllChatList] = useState(chatList);
 
 	useEffect(() => {
-		console.log("router", router);
 		if (router.query.id) {
 			if (getChat(router.query.id)) {
 				setActiveChatId(router.query.id);
 			}
 		}
 		if (router.pathname) {
-			const sec = getSection()
+			const sec = getSection();
 			setSection(sec);
 		}
 		onScroll(600);
@@ -118,6 +117,12 @@ export default function ChatProvider({ children }: any) {
 		if (res && res.length > 0 && res[0].data) {
 			setAssets(res[0].data);
 		}
+	};
+
+	const setActiveChatById = (id: string) => {
+		setActiveChatId(id);
+		const newURL = location.href.replace(/(\?|&)id=[^&]*/, "$1id=" + id);
+		history.replaceState({}, document.title, newURL);
 	};
 
 	const onScroll = (timer: number) => {
@@ -162,7 +167,7 @@ export default function ChatProvider({ children }: any) {
 			matcher_type: section == "assets" ? 2 : type === "form" ? 1 : 0,
 		});
 
-		console.log(res);
+		// console.log(res);
 		if (res && res.length > 0 && res[0].data && res[0].data.length > 0) {
 			updateMessage(activeChatId, id, {
 				recommends: res[0].data || [],
@@ -446,7 +451,7 @@ export default function ChatProvider({ children }: any) {
 				activeChatId,
 				activeChat,
 				activeMessages,
-				setActiveChatId,
+
 				removeMessage,
 				allChatList,
 				getChatList,
@@ -460,6 +465,7 @@ export default function ChatProvider({ children }: any) {
 				addMessage,
 				showNav,
 				setShowNav,
+				setActiveChatById,
 				openNav,
 				onOpen,
 				closeNav,

@@ -36,7 +36,7 @@ export default function Channel(props: any) {
 	const myInput = useRef<any>(null);
 	const [editIndex, setEditIndex] = useState<any>(null);
 	const {
-		setActiveChatId,
+		setActiveChatById,
 		activeChatId,
 		removeChat,
 		activeChat,
@@ -66,12 +66,7 @@ export default function Channel(props: any) {
 				<div
 					key={i}
 					onClick={() => {
-						setActiveChatId(t.id);
-						const newURL = location.href.replace(
-							/(\?|&)id=[^&]*/,
-							"$1id=" + t.id
-						);
-						history.replaceState({}, document.title, newURL);
+						setActiveChatById(t.id);
 					}}
 					className={`w-full ${
 						t.id == activeChatId ? "bg-[#E4DFF8]" : ""
@@ -169,10 +164,7 @@ export default function Channel(props: any) {
 														return t.id !== item.id;
 													}
 												);
-												console.log(filterChatList);
-												router.push(
-													`/${section}?id=${filterChatList[0]["id"]}`
-												);
+												setActiveChatById(filterChatList[0]["id"]);
 											}}
 										>
 											<Icon as={MdDeleteOutline} color="#7A61DE" w="20px" />

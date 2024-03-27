@@ -20,7 +20,6 @@ import { useTimezoneSelect, allTimezones } from 'react-timezone-select'
 
 export default function AssetForm(props: any) {
     const {
-        setActiveChatId,
         activeChatId,
         removeChat,
         activeChat,

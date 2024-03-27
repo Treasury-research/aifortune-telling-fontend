@@ -57,7 +57,7 @@ export default function useWallet() {
 	const { setUserId, clearUserInfo, setAccount, setEmail, setToken, setName } =
 		userInfoStore();
 
-	console.log("isConnected:", isConnected, address);
+	// console.log("isConnected:", isConnected, address);
 
 	// step1
 	const signAndGetJwt = async () => {

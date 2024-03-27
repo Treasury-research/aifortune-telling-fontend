@@ -16,9 +16,8 @@ import { useChatStore } from "store/chatStore";
 
 export default function Assets() {
 	const {
-		setActiveChatId,
 		activeChatId,
-		removeChat,
+		setActiveChatById,
 		activeChat,
 		chatList,
 		allChatList,
@@ -62,7 +61,7 @@ export default function Assets() {
 		};
 
 		addChat(newChat);
-		router.push(`/${section}?id=${newChat.id}`);
+		setActiveChatById(newChatId);
 	};
 
 	// const addAssets = () => {
@@ -105,9 +104,6 @@ export default function Assets() {
 
 	useEffect(() => {
 		getAssets();
-		// if (!name) {
-		// 	router.push(`/numerology`);
-		// }
 	}, []);
 
 	useEffect(() => {

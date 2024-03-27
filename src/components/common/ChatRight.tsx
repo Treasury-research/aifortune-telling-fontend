@@ -22,12 +22,10 @@ import AssetForm from "./../assets/AssetForm";
 import { Markdown } from "./MarkDown";
 import { useChatStore } from "store/chatStore";
 
-
 export default function ChatRight(props: any) {
 	const router = useRouter();
 	const { lang } = useChatStore();
 	const {
-		setActiveChatId,
 		activeChatId,
 		removeChat,
 		activeChat,

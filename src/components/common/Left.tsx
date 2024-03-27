@@ -47,18 +47,6 @@ export default function Left({ tabName }: { tabName: string }) {
 								w="full"
 								className="rounded-[50%] background-[#fff] cursor-pointer mb-5"
 								onClick={() => {
-									if (!name) {
-										toast({
-											description: "请先提交您的个人信息!",
-											duration: 3000,
-											position: "top-right",
-											variant: "subtle",
-											status: "info",
-											isClosable: false,
-										});
-										router.push(isPhone() ? `mobile/numerology` : `/numerology`);
-										return;
-									}
 									const chatList: any = getAllChatList()
 										.filter((item: any) => item.section === t.router)
 										.sort((a: any, b: any) => {
@@ -69,9 +57,13 @@ export default function Left({ tabName }: { tabName: string }) {
 											return 1;
 										});
 									if (chatList.length > 0) {
-										router.push(`/${t.router}?id=${chatList[0].id}`);
+										router.push(
+											`${isPhone() ? "/mobile" : ""}/${t.router}?id=${
+												chatList[0].id
+											}`
+										);
 									} else {
-										router.push(`/${t.router}`);
+										router.push(`${isPhone() ? "/mobile" : ""}/${t.router}`);
 									}
 								}}
 							>

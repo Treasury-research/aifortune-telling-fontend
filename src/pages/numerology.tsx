@@ -24,9 +24,8 @@ import api, { baseURL } from "api";
 
 export default function Numerology() {
 	const {
-		setActiveChatId,
 		activeChatId,
-		removeChat,
+		setActiveChatById,
 		activeChat,
 		chatList,
 		allChatList,
@@ -94,7 +93,7 @@ export default function Numerology() {
 		};
 
 		addChat(newChat);
-		router.push(`/${section}?id=${newChat.id}`);
+		setActiveChatById(newChatId);
 	};
 
 	useEffect(() => {

@@ -42,7 +42,7 @@ const Chat = () => {
 			position="relative"
 		>
 			<Flex w="280vw" className={showNav ? "move-left" : "move-center"}>
-				<Menu tabName="numerology" />
+				<Menu tabName="assets" />
 				<VStack
 					w="100vw"
 					h="full"

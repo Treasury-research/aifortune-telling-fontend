@@ -17,7 +17,6 @@ import { useChatStore } from "store/chatStore";
 
 export default function UserForm(props: any) {
 	const {
-		setActiveChatId,
 		activeChatId,
 		removeChat,
 		activeChat,
