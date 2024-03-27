@@ -96,7 +96,7 @@ export function Menu({ tabName }: { tabName: string }) {
 				</div>
 				<Channel resetConvertion={() => resetConvertion()} />
 				<div
-					className="w-full h-10 cursor-pointer px-5"
+					className="w-full h-10 cursor-pointer pr-5 pl-2"
 					onClick={() => {
 						if (!name && section==="assets") {
 							toast({
