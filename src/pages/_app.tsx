@@ -13,6 +13,7 @@ import { Web3ModalProvider } from "context/Web3ModalProvider";
 import dayjs from "dayjs";
 
 import "dayjs/locale/zh-cn";
+import "react-vant/lib/index.css";
 import "styles/h5.css";
 
 import "styles/globals.css";

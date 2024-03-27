@@ -21,7 +21,7 @@ export function ChatTitle() {
 		activeChat,
 		isLoading,
 		showNav,
-		openQuest,
+		isPhone,
 		openNav,
 		isGenerate,
 		setActionSheetProps,
@@ -31,27 +31,29 @@ export function ChatTitle() {
 
 	return (
 		<>
-			<Box w="100vw" pos="fixed" top="0">
-				{showNav && <Box w="full" h="full" pos="absolute" zIndex={5} />}
-				<NavBar
-					className="nav-bar"
-					title={
-						<Tabs type="jumbo" color="#000">
-							<Tabs.TabPane title="Chat" />
-						</Tabs>
-					}
-					leftText={
-						<Icon
-							className="chat-menu"
-							as={AiOutlineMenu}
-							boxSize={5}
-							mr={3}
-							ml={1}
-							onClick={openNav}
-						/>
-					}
-				/>
-			</Box>
+			{isPhone ? (
+				<Box w="100vw" pos="fixed" top="0">
+					{showNav && <Box w="full" h="full" pos="absolute" zIndex={5} />}
+					<NavBar
+						className="nav-bar"
+						title={activeChat?.name || "Chat"}
+						leftText={
+							<Icon
+								className="chat-menu"
+								as={AiOutlineMenu}
+								boxSize={5}
+								mr={3}
+								ml={1}
+								onClick={openNav}
+							/>
+						}
+					/>
+				</Box>
+			) : (
+				<div className="h-20 flex items-center text-[18px] font-bold">
+					# {activeChat?.name || "Chat"}
+				</div>
+			)}
 		</>
 	);
 }

@@ -110,7 +110,7 @@ export default function useWallet() {
 			setUserId(res[0]?.data?.user_id);
 			setEmail(res[0]?.data?.email);
 			setToken(res[0]?.data?.token);
-			setName(res[0]?.data?.name);
+			// setName(res[0]?.data?.name);
 		} else {
 			setIsLogin.off();
 			toast({
@@ -165,7 +165,7 @@ export default function useWallet() {
 			setAccount(res[0]?.data?.account);
 			setUserId(res[0]?.data?.user_id);
 			setEmail(res[0]?.data?.email);
-			setName(res[0]?.data?.name);
+			// setName(res[0]?.data?.name);
 		}
 	};
 
