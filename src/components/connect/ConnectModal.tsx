@@ -17,12 +17,14 @@ import api from "api";
 import { userInfoStore } from "store/userInfoStore";
 import { CloseIcon } from "@chakra-ui/icons";
 import useWallet from "lib/useWallet";
+import { useChatStore } from "store/chatStore";
 
 export function ConnectModal(props: any) {
 	const router = useRouter();
 	const { openConnectModal, setOpenConnectModal } = useConnectModalStore();
 	const { handleLogin, openConnectWallet, isConnected } = useWallet();
 	const [isLoading, setIsLoading] = useBoolean(false);
+	const { lang } = useChatStore();
 
 	return (
 		<>
@@ -33,7 +35,7 @@ export function ConnectModal(props: any) {
 					setOpenConnectModal(false);
 					setIsLoading.off();
 				}}
-				title="Sign In"
+				title={lang === "CN" ? "登录" : "Sign In"}
 				isCentered={true}
 			>
 				<Flex
@@ -54,7 +56,16 @@ export function ConnectModal(props: any) {
 						isConnected ? handleLogin() : openConnectWallet();
 					}}
 				>
-					<Box> {isConnected ? "Sign with Wallet" : "Connect Wallet"}</Box>
+					<Box>
+						{" "}
+						{isConnected
+							? lang === "CN"
+								? "签名"
+								: "Sign with Wallet"
+							: lang === "CN"
+							? "连接钱包"
+							: "Connect Wallet"}
+					</Box>
 					<Box>
 						{isLoading ? (
 							<Spinner size="md" mr={2} mt={1} color="gray.700" />

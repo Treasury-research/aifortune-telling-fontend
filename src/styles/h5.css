@@ -1,4 +1,10 @@
 @media screen and (max-width: 600px) {
+	.chat-left {
+		max-width: calc(100vw - 40px) !important;
+	}
+	.chat-left-content {
+		width: fit-content;
+	}
 	.chat-input {
 		margin-bottom: 4px !important;
 	}

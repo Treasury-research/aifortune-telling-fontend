@@ -89,7 +89,13 @@ export const ConnectBtn = (props: any) => {
 						onClick={() => setOpenConnectModal(true)}
 					>
 						<Text fontSize="13px" color="#fff" ml="-2px" pr={1}>
-							{isConnected ? "Sign in" : "Connect"}
+							{isConnected
+								? lang === "CN"
+									? "登录"
+									: "Sign in"
+								: lang === "CN"
+								? "连接钱包"
+								: "Connect"}
 						</Text>
 					</Button>
 				</Box>

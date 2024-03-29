@@ -246,12 +246,14 @@ export default function ChatProvider({ children }: any) {
 			url = "/api/chat_bazi_match";
 			params = {
 				...paload,
+				user_id: userId,
 				conversation_id: activeChat.id,
 				matcher_type: 2,
 			};
 		} else {
 			url = "/api/get_bazi_info";
 			params = {
+				user_id: userId,
 				conversation_id: activeChat.id,
 			};
 		}
@@ -400,12 +402,14 @@ export default function ChatProvider({ children }: any) {
 			}
 			params = {
 				...paload,
+				user_id: userId,
 				conversation_id: activeChat.id,
 				matcher_type: 1,
 			};
 		} else {
 			url = "/api/get_bazi_info";
 			params = {
+				user_id: userId,
 				conversation_id: activeChat.id,
 			};
 		}

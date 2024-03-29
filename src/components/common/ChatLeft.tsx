@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { Router, useRouter } from "next/router";
 import { CiSearch } from "react-icons/ci";
- 
+
 import { SearchIcon } from "@chakra-ui/icons";
 import useChatContext from "hooks/useChatContext";
 import { v4 as uuidv4 } from "uuid";
@@ -29,7 +29,7 @@ export default function ChatLeft(props: any) {
 			{item.loading ? (
 				<Flex w="full" className="flex gap-5 items-start ">
 					<Image
-						className="shrink-0 h-[48px] rounded-[50%]"
+						className="shrink-0 h-[42px] rounded-[50%]"
 						src={`/images/logo.png`}
 						alt=""
 					/>
@@ -53,23 +53,21 @@ export default function ChatLeft(props: any) {
 				</Flex>
 			) : (
 				<Box w="full">
-					<Flex className="  gap-5 items-start mb-4">
+					<Flex className="chat-left gap-3 items-start mb-4">
 						<Image
-							className="shrink-0 h-[48px] rounded-[50%]"
+							className="shrink-0 h-[42px] rounded-[50%]"
 							src={`/images/logo.png`}
 							alt=""
 						/>
-						<div className="px-5 py-3 bg-[#fff] rounded-[6px] overflow-auto">
+						<div className="chat-left-content px-5 py-3 bg-[#fff] rounded-[6px] overflow-auto">
 							{item.source == "form" ||
 							item.source == "jqpp" ||
 							!item.source ? (
-								<div className="max-w-[calc(100vw-900px)]">
-									<Box
-										className={`pre-item`}
-										color={item.error ? "red" : "#000"}
-										dangerouslySetInnerHTML={{ __html: item.content }}
-									/>
-								</div>
+								<Box
+									className={`pre-item`}
+									color={item.error ? "red" : "#000"}
+									dangerouslySetInnerHTML={{ __html: item.content }}
+								/>
 							) : (
 								<Box
 									color={item.error ? "red" : "#000"}
