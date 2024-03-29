@@ -70,9 +70,9 @@ export const ConnectBtn = (props: any) => {
 					</Menu>
 				</Box>
 			) : (
-				<Box w="95px">
+				<Box>
 					<Button
-						w="full"
+						w="auto"
 						leftIcon={
 							isConnected ? (
 								<Icon as={BiLogIn} boxSize={4} ml={1} />
@@ -82,20 +82,14 @@ export const ConnectBtn = (props: any) => {
 						}
 						variant={props.bg ? "" : "bluePrimary"}
 						size="sm"
-						px={3}
+						px={2}
 						bg={props.bg}
 						borderRadius={16}
 						cursor="pointer"
 						onClick={() => setOpenConnectModal(true)}
 					>
 						<Text fontSize="13px" color="#fff" ml="-2px" pr={1}>
-							{isConnected
-								? lang === "CN"
-									? "登录"
-									: "Sign in"
-								: lang === "CN"
-								? "连接钱包"
-								: "Connect"}
+							{isConnected ? (lang === "CN" ? "登录" : "Sign in") : "Connect"}
 						</Text>
 					</Button>
 				</Box>

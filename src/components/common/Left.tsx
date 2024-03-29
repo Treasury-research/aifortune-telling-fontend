@@ -29,7 +29,7 @@ export default function Left({ tabName }: { tabName: string }) {
 
 	return (
 		<>
-			<VStack w="auto" justify="space-between" h="full" bg="#E4DFF8">
+			<VStack w="auto" px={2} justify="space-between" h="full" bg="#E4DFF8">
 				<Box>
 					<Image
 						className="shrink-0 cursor-pointer"

@@ -60,7 +60,7 @@ export function ConnectModal(props: any) {
 						{" "}
 						{isConnected
 							? lang === "CN"
-								? "签名"
+								? "签名消息"
 								: "Sign with Wallet"
 							: lang === "CN"
 							? "连接钱包"
