@@ -45,6 +45,8 @@ export default function ChatProvider({ children }: any) {
 		account,
 		userConverId,
 		userId,
+		userKey,
+		setUserKey,
 		setUserId,
 		setAssets,
 	} = userInfoStore();
@@ -112,7 +114,7 @@ export default function ChatProvider({ children }: any) {
 
 	const getAssets = async () => {
 		const res: any = await api.post(`/api/assets_select`, {
-			user_id: userId,
+			user_id: userKey,
 		});
 		if (res && res.length > 0 && res[0].data) {
 			setAssets(res[0].data);
@@ -163,7 +165,7 @@ export default function ChatProvider({ children }: any) {
 		const res: any = await api.post(`${baseURL}/api/question_rec`, {
 			conversation_id: activeChat.id,
 			...paload,
-			user_id: userId,
+			user_id: userKey,
 			matcher_type: section == "assets" ? 2 : type === "form" ? 1 : 0,
 		});
 
@@ -193,7 +195,6 @@ export default function ChatProvider({ children }: any) {
 		};
 
 		const processChunkedResponse = (response: any) => {
-			console.log("response", response);
 			return new Promise((resolve, reject) => {
 				var reader = response.body.getReader();
 				var decoder = new TextDecoder();
@@ -213,12 +214,11 @@ export default function ChatProvider({ children }: any) {
 
 					sourceChunk += chunk;
 
-					updateMessage(activeChatId, id, [
-						{
-							content: sourceChunk,
-							loading: false,
-						},
-					]);
+					console.log("sourceChunk", sourceChunk);
+					updateMessage(activeChatId, id, {
+						content: sourceChunk,
+						loading: false,
+					});
 
 					// console.log("chunk1", chunk);
 					if (result.done) {
@@ -237,7 +237,7 @@ export default function ChatProvider({ children }: any) {
 			url = "/api/baziMatch";
 			params = {
 				...paload,
-				user_id: userId,
+				user_id: userKey,
 				conversation_id: activeChat.id,
 				matcher_type: 2,
 				account: account || null,
@@ -246,14 +246,14 @@ export default function ChatProvider({ children }: any) {
 			url = "/api/chat_bazi_match";
 			params = {
 				...paload,
-				user_id: userId,
+				user_id: userKey,
 				conversation_id: activeChat.id,
 				matcher_type: 2,
 			};
 		} else {
 			url = "/api/get_bazi_info";
 			params = {
-				user_id: userId,
+				user_id: userKey,
 				conversation_id: activeChat.id,
 			};
 		}
@@ -266,6 +266,7 @@ export default function ChatProvider({ children }: any) {
 				source: type,
 			},
 		]);
+
 		onScroll(400);
 
 		setIsDone(false);
@@ -281,7 +282,7 @@ export default function ChatProvider({ children }: any) {
 			.then(processChunkedResponse)
 			.then((respones: any) => {
 				if (respones.done) {
-					console.log(respones);
+					console.log("respones", respones);
 				}
 			})
 			.catch(onChunkedResponseError);
@@ -304,7 +305,6 @@ export default function ChatProvider({ children }: any) {
 		};
 
 		const processChunkedResponse = (response: any) => {
-			console.log("response", response);
 			return new Promise((resolve, reject) => {
 				var reader = response.body.getReader();
 				var decoder = new TextDecoder();
@@ -321,7 +321,6 @@ export default function ChatProvider({ children }: any) {
 					let chunk: any = decoder.decode(result.value || new Uint8Array(), {
 						stream: !result.done,
 					});
-					console.log("chunk", chunk);
 
 					let str: any = chunk.match(/<chunk>([\s\S]*?)<\/chunk>/g);
 					if (str && Array.isArray(str) && str.length > 0) {
@@ -331,8 +330,8 @@ export default function ChatProvider({ children }: any) {
 						for (let i = 0; i < chunk1.length; i++) {
 							if (isJSONString(chunk1[i])) {
 								let user = JSON.parse(chunk1[i]);
-								if (user.user_id) {
-									setUserId(user.user_id);
+								if (user.user_key) {
+									setUserKey(user.user_key);
 								}
 								chunk.replace(chunk1[i], "");
 							}
@@ -372,7 +371,7 @@ export default function ChatProvider({ children }: any) {
 				url = "/api/baziMatch";
 				params = {
 					...paload,
-					user_id: userId,
+					user_id: userKey,
 					account: account || null,
 					name: activeChat.messages[1].name,
 					conversation_id: activeChat.id,
@@ -384,7 +383,7 @@ export default function ChatProvider({ children }: any) {
 				url = "/api/baziAnalysis";
 				params = {
 					...paload,
-					user_id: userId,
+					user_id: userKey,
 					account: account || null,
 					name: activeChat.messages[1].name,
 					conversation_id: activeChat.id,
@@ -402,14 +401,14 @@ export default function ChatProvider({ children }: any) {
 			}
 			params = {
 				...paload,
-				user_id: userId,
+				user_id: userKey,
 				conversation_id: activeChat.id,
 				matcher_type: 1,
 			};
 		} else {
 			url = "/api/get_bazi_info";
 			params = {
-				user_id: userId,
+				user_id: userKey,
 				conversation_id: activeChat.id,
 			};
 		}

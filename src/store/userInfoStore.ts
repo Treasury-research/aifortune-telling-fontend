@@ -12,10 +12,14 @@ export const userInfoStore: any = create<any>()(
 			sex: false, //false 男 true女
 			birthDay: "",
 			userId: "",
+			userKey: "",
 			userConverId: "",
 			assets: {},
 			setAccount: (account: string) => {
 				set({ account });
+			},
+			setUserKey: (userKey: string) => {
+				set({ userKey });
 			},
 			setEmail: (email: string) => {
 				set({ email });
@@ -69,6 +73,7 @@ export const userInfoStore: any = create<any>()(
 					sex: false, //false 男 true女
 					birthDay: "",
 					userId: "",
+					userKey:"",
 					token: "",
 					userConverId: "",
 					assets: {},
