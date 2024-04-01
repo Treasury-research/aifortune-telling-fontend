@@ -73,7 +73,7 @@ export const userInfoStore: any = create<any>()(
 					sex: false, //false 男 true女
 					birthDay: "",
 					userId: "",
-					userKey:"",
+					// userKey:"",
 					token: "",
 					userConverId: "",
 					assets: {},

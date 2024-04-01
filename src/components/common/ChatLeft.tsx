@@ -17,12 +17,31 @@ import useChatContext from "hooks/useChatContext";
 import { v4 as uuidv4 } from "uuid";
 import { BeatLoader } from "react-spinners";
 import { useChatStore } from "store/chatStore";
+import { BiRefresh } from "react-icons/bi";
 
 export default function ChatLeft(props: any) {
 	const router = useRouter();
-	const { activeChatId, submitQuestion, addMessage } = useChatContext();
+	const { activeChatId, submitQuestion, addMessage, activeChat } =
+		useChatContext();
 	const { item } = props;
 	const { lang } = useChatStore();
+
+	const regen = () => {
+		const lastActiveMsg = activeChat.messages[props.index - 1];
+		if (lastActiveMsg?.category == "form") {
+			submitQuestion("form", {
+				year: lastActiveMsg.birthDay.split("/")[0],
+				month: lastActiveMsg.birthDay.split("/")[1],
+				day: lastActiveMsg.birthDay.split("/")[2],
+				time: lastActiveMsg.time,
+				n: lastActiveMsg.sex == "1" ? false : true,
+			});
+		} else {
+			submitQuestion("chat", {
+				message: lastActiveMsg?.content,
+			});
+		}
+	};
 
 	return (
 		<Box w="full">
@@ -76,6 +95,14 @@ export default function ChatLeft(props: any) {
 								/>
 							)}
 						</div>
+						{/* {item.error && } */}
+						<Icon
+							as={BiRefresh}
+							boxSize={5}
+							mt={3}
+							cursor="pointer"
+							onClick={regen}
+						/>
 					</Flex>
 					{item.recommends && (
 						<VStack

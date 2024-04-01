@@ -51,6 +51,8 @@ export default function ChatProvider({ children }: any) {
 		setAssets,
 	} = userInfoStore();
 
+	// console.log("userKey", userKey);
+
 	const [section, setSection] = useState<string | null>();
 	const { onOpen, onClose, isOpen } = useDisclosure();
 	const [input, setInput] = useState("");
@@ -330,7 +332,7 @@ export default function ChatProvider({ children }: any) {
 						for (let i = 0; i < chunk1.length; i++) {
 							if (isJSONString(chunk1[i])) {
 								let user = JSON.parse(chunk1[i]);
-								if (user.user_key) {
+								if (user?.user_key) {
 									setUserKey(user.user_key);
 								}
 								chunk.replace(chunk1[i], "");

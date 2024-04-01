@@ -7,6 +7,7 @@ import { userInfoStore } from "store/userInfoStore";
 const api = axios.create({
 	baseURL,
 	retry: 1,
+	timeout: 60000,
 } as any);
 
 api.interceptors.request.use(

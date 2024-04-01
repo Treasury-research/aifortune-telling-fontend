@@ -42,6 +42,7 @@ export default function ChatPanel() {
 	const toast = useToast();
 
 	const assetsBtnClick = (t: any) => {
+		updateChat(activeChatId, { name: t[0] });
 		submitQuestion("form", {
 			name: t[0],
 			n: true,
@@ -58,7 +59,7 @@ export default function ChatPanel() {
 						<>
 							{activeChat.messages.map((t: any, i: number) => (
 								<div key={i}>
-									{t.type == "answer" && <ChatLeft item={t} />}
+									{t.type == "answer" && <ChatLeft item={t} index={i} />}
 									{t.type == "question" && <ChatRight item={t} index={i} />}
 								</div>
 							))}
