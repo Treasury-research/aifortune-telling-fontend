@@ -36,32 +36,6 @@ export default function Assets() {
 	const toast = useToast();
 	const { clearChatInfo, lang } = useChatStore();
 
-	// console.log("assets", assets);
-
-	// const addAssets = () => {
-	// 	updateChat(activeChatId, {
-	// 		messages: [
-	// 			{
-	// 				id: uuidv4(),
-	// 				content: "请填写币种信息，以便占卜师为您预测运势~",
-	// 				type: "answer",
-	// 				loading: false,
-	// 			},
-	// 			{
-	// 				id: uuidv4(),
-	// 				type: "question",
-	// 				isSubmit: false,
-	// 				category: "form",
-	// 				name: "",
-	// 				birthDay: "",
-	// 				is_public: "1",
-	// 				time: "01:00~02:59",
-	// 				utc: "UTC+08:00",
-	// 			},
-	// 		],
-	// 	});
-	// };
-
 	useEffect(() => {
 		getAssets();
 	}, []);

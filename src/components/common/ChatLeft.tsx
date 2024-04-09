@@ -89,27 +89,29 @@ export default function ChatLeft(props: any) {
 								/>
 							) : (
 								<Box
+									className={`pre-item`}
 									color={item.error ? "red" : "#000"}
-									className="max-w-[calc(100vw-900px)]"
+									// className="max-w-[calc(100vw-900px)]"
 									dangerouslySetInnerHTML={{ __html: item.content }}
 								/>
 							)}
 						</div>
-						{/* {item.error && } */}
-						<Icon
-							as={BiRefresh}
-							boxSize={5}
-							mt={3}
-							cursor="pointer"
-							onClick={regen}
-						/>
+						{item.error && (
+							<Icon
+								as={BiRefresh}
+								boxSize={5}
+								mt={3}
+								cursor="pointer"
+								onClick={regen}
+							/>
+						)}
 					</Flex>
 					{item.recommends && (
 						<VStack
 							alignItems="flex-start"
-							ml="68px"
+							ml="55px"
 							mb={5}
-							className="max-w-[calc(100vw-900px)]"
+							className="chat-recomand max-w-[calc(100vw-900px)]"
 							fontSize="14px"
 							color="#7A61DE"
 						>

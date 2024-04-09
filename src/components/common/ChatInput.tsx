@@ -27,7 +27,7 @@ export default function ChatInput(props: any) {
 	const { name, userConverId, resetChat } = userInfoStore();
 
 	return (
-		<div className="w-[90%] flex px-3 mx-auto bg-[#fff] h-[50px] rounded-[20px] items-center">
+		<div className="chat-input w-[90%] flex px-3 mx-auto bg-[#fff] h-[50px] rounded-[20px] items-center">
 			<div className="w-[calc(100%-30px)]">
 				<TextArea
 					style={{ border: "none", boxShadow: "none" }}

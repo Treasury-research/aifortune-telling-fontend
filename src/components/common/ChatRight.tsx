@@ -17,8 +17,8 @@ import type { DatePickerProps } from "antd";
 import { DatePicker, Space } from "antd";
 import useChatContext from "hooks/useChatContext";
 import { userInfoStore } from "store/userInfoStore";
-import UserForm from "./../numberology/UserForm";
-import AssetForm from "./../assets/AssetForm";
+import UserForm from "../template/UserForm";
+import AssetForm from "../template/AssetForm";
 import { Markdown } from "./MarkDown";
 import { useChatStore } from "store/chatStore";
 
@@ -42,8 +42,10 @@ export default function ChatRight(props: any) {
 	const { item, index } = props;
 
 	return (
-		<VStack alignItems="flex-end" mb={5}>
-			<div className="flex gap-5 items-start ml-auto mb-5">
+		<VStack w="full" alignItems="flex-end" mb={5}>
+			<Box
+				className="right-panel flex gap-5 items-start ml-auto mb-5"
+			>
 				{item.category == "form" ? (
 					<>
 						{section == "numerology" ? (
@@ -57,8 +59,9 @@ export default function ChatRight(props: any) {
 						<Markdown value={item.content} />
 					</div>
 				)}
-				<Avatar size="md" bg="rgba(160,60,214)" />
-			</div>
+
+				<Avatar w="40px" h="40px" bg="rgba(160,60,214)" />
+			</Box>
 		</VStack>
 	);
 }

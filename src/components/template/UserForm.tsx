@@ -6,7 +6,7 @@ import {
 	RadioGroup,
 	Stack,
 	Button,
-	Icon,
+	Box,
 } from "@chakra-ui/react";
 import { DatePicker, Select } from "antd";
 import useChatContext from "hooks/useChatContext";
@@ -68,8 +68,8 @@ export default function UserForm(props: any) {
 	};
 
 	return (
-		<div>
-			<div className="w-[460px] p-5 bg-[#fff] rounded-[6px]">
+		<Box flex={1} maxW="450px" className="user-form">
+			<div className="w-auto p-5 bg-[#fff] rounded-[6px]">
 				<div className="mb-3">{lang === "CN" ? "姓名" : "Name"}</div>
 				<Input
 					className="mb-3"
@@ -194,6 +194,6 @@ export default function UserForm(props: any) {
 			>
 				{lang === "CN" ? "提交" : "Submit"}
 			</Button>
-		</div>
+		</Box>
 	);
 }

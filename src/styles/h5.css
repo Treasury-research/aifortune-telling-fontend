@@ -1,6 +1,6 @@
 @media screen and (max-width: 600px) {
 	.chat-left {
-		max-width: calc(100vw - 40px) !important;
+		max-width: calc(100vw - 25px) !important;
 	}
 	.chat-left-content {
 		width: fit-content;
@@ -95,6 +95,22 @@
 			transform: scale(1.03);
 			margin-left: 8px;
 		}
+	}
+
+	.right-panel {
+		width: 100%;
+		justify-content: flex-end;
+	}
+	.right-panel > div:first-child {
+		width: calc(100% - 70px);
+	}
+
+	.chat-recomand {
+		max-width: calc(100vw - 25px) !important;
+	}
+
+	.chat-input {
+		width: 95%!important;
 	}
 }
 /*  */

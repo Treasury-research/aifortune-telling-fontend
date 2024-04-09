@@ -5,6 +5,7 @@ import useChatContext from "hooks/useChatContext";
 import { useAccount } from "wagmi";
 import { ChatTitle } from "components/common/ChatTitle";
 import { Menu } from "components/common/menu";
+import ChatPanel from "components/common/ChatPanel";
 
 // import { Menu } from "components/chat/menu";
 // import ChatContent from "components/chat/content";
@@ -29,7 +30,12 @@ const Chat = () => {
 		closeNav,
 		submitQuestion,
 		addMessage,
+		getAssets,
 	} = useChatContext();
+
+	useEffect(() => {
+		getAssets();
+	}, []);
 
 	return (
 		<Container
@@ -56,15 +62,17 @@ const Chat = () => {
 				>
 					<ChatTitle />
 					<VStack
-						pt="60px"
+						pt="70px"
 						pb="5px"
 						w="full"
 						h="100%"
+						px={3}
+						bg="#F3F4F6"
 						mt="0!"
 						pointerEvents={showNav ? "none" : "auto"}
 						alignItems="flex-start"
 					>
-						1111
+						<ChatPanel />
 					</VStack>
 				</VStack>
 			</Flex>
