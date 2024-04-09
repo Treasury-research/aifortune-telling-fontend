@@ -110,7 +110,11 @@
 	}
 
 	.chat-input {
-		width: 95%!important;
+		width: 95% !important;
+	}
+
+	.chat-skeleton {
+		width: 250px !important;
 	}
 }
 /*  */

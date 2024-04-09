@@ -45,7 +45,7 @@ export default function ChatLeft(props: any) {
 
 	return (
 		<Box w="full">
-			{item.loading ? (
+			{true ? (
 				<Flex w="full" className="flex gap-5 items-start ">
 					<Image
 						className="shrink-0 h-[42px] rounded-[50%]"
@@ -63,7 +63,8 @@ export default function ChatLeft(props: any) {
 						<Skeleton
 							height="8px"
 							mt={2}
-							w={"400px"}
+							className="chat-skeleton"
+							w={"320px"}
 							startColor="#F3F3F3"
 							endColor="#DFDFDF"
 							borderRadius={"8px"}
