@@ -45,7 +45,7 @@ export default function ChatLeft(props: any) {
 
 	return (
 		<Box w="full">
-			{true ? (
+			{item.loading ? (
 				<Flex w="full" className="flex gap-5 items-start ">
 					<Image
 						className="shrink-0 h-[42px] rounded-[50%]"
