@@ -44,7 +44,7 @@ export default function ChatRight(props: any) {
 	return (
 		<VStack w="full" alignItems="flex-end" mb={5}>
 			<Box
-				className="right-panel flex gap-5 items-start ml-auto mb-5"
+				className="right-panel flex gap-3 items-start ml-auto mb-5"
 			>
 				{item.category == "form" ? (
 					<>
