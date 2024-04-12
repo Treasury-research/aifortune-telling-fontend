@@ -72,7 +72,7 @@ export default function HotCoins(props: any) {
 										onClick={() => assetsBtnClick(t)}
 									>
 										<Image
-											src={`/images/coins/${t[0]}.svg`}
+											src={`https://static.okx.com/cdn/oksupport/asset/currency/icon/${t[0].toLowerCase()}.png`}
 											boxSize={5}
 											alt=""
 										/>
@@ -87,7 +87,7 @@ export default function HotCoins(props: any) {
 								</Text>
 								<HStack pt={2} spacing={2} flexFlow="row wrap" gap={2}>
 									{(assets["recent_hot"] || []).map((t: any, i: number) => (
-										<Flex
+										<HStack
 											key={i}
 											px={4}
 											h="32px"
@@ -98,8 +98,13 @@ export default function HotCoins(props: any) {
                             rounded-[2px] cursor-pointer text-center"
 											onClick={() => assetsBtnClick(t)}
 										>
-											{t[0]}
-										</Flex>
+											<Image
+												src={`https://static.okx.com/cdn/oksupport/asset/currency/icon/${t[0].toLowerCase()}.png`}
+												boxSize={5}
+												alt=""
+											/>
+											<Text>{t[0]}</Text>
+										</HStack>
 									))}
 								</HStack>
 							</Box>
