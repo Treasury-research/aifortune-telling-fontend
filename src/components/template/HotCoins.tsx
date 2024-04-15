@@ -73,7 +73,7 @@ export default function HotCoins(props: any) {
 									>
 										<Image
 											src={`https://static.okx.com/cdn/oksupport/asset/currency/icon/${t[0].toLowerCase()}.png`}
-											boxSize={5}
+											boxSize={6}
 											alt=""
 										/>
 										<Text>{t[0]}</Text>
@@ -90,7 +90,7 @@ export default function HotCoins(props: any) {
 										<HStack
 											key={i}
 											px={4}
-											h="32px"
+											py={1}
 											borderRadius={4}
 											className="items-center 
                             border-[1px] 
