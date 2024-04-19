@@ -154,7 +154,7 @@ export default function Channel(props: any) {
 					: "Five Elements"}
 			</div>
 			<div className="w-full">
-				{allChatList.map((t: any, i: number) => (
+				{allChatList?.map((t: any, i: number) => (
 					<div
 						key={i}
 						onClick={() => {

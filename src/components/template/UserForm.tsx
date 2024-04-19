@@ -105,14 +105,15 @@ export default function UserForm(props: any) {
 					{lang === "CN" ? "出生时间" : "Date Of Birth"}
 				</div>
 				<div className="mb-3 flex items-center">
-					<div className="w-[28%] mr-3">
+					<div className="w-[34%] mr-3 text-[12px]" >
 						<Select
 							value={item.utc}
 							disabled={item.isSubmit}
 							onChange={(e: any) =>
 								updateMessage(activeChatId, item.id, { utc: e })
 							}
-							style={{ width: "100%" }}
+							style={{ width: "110%" }}
+						
 						>
 							<option value="UTC-11:00">UTC-11:00</option>
 							<option value="UTC-10:00">UTC-10:00</option>
@@ -139,7 +140,7 @@ export default function UserForm(props: any) {
 							<option value="UTC+11:00">UTC+11:00</option>
 						</Select>
 					</div>
-					<div className="w-[calc(42%-24px)] mr-3">
+					<div className="w-[calc(36%-24px)] mr-3">
 						<DatePicker
 							placeholder={lang === "CN" ? "请输入时间" : "Fill time"}
 							disabled={item.isSubmit}
