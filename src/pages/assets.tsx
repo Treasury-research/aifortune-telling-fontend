@@ -49,7 +49,7 @@ export default function Assets() {
 
 			router.push(mobileURL);
 		}
-	}, [router]);
+	}, [isPhone]);
 
 	return (
 		<>

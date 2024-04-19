@@ -44,6 +44,7 @@ export default function Numerology() {
 	const router = useRouter();
 	const toast = useToast();
 
+	console.log("isPhone", isPhone);
 	useEffect(() => {
 		if (isPhone) {
 			const mobileURL = location.href.replace(
@@ -52,7 +53,7 @@ export default function Numerology() {
 			);
 			router.push(mobileURL);
 		}
-	}, [router]);
+	}, [isPhone]);
 
 	return (
 		<>
